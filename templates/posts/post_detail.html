@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>{{user.username}} - posts</title>
+{% endblock head %}
+
+{% block body_block %}
+<div id="layoutSidenav_content">
+<div style="margin-top:1%">
+<div class="container">
+<div class="card card-header-actions mx-auto">
+    <div class="card-header">
+        Post Detail
+        <div>
+            <button class="btn btn-pink btn-icon mr-2">
+                <i data-feather="heart"></i>
+            </button>
+            <button class="btn btn-teal btn-icon mr-2">
+                <i data-feather="bookmark"></i>
+            </button>
+            <button class="btn btn-blue btn-icon">
+                <i data-feather="share"></i>
+            </button>
+            <button class="btn btn-red btn-icon mr-2">
+                <a style="color:black;" href="{% url 'posts:deleteposts' pk=object.pk %}">
+                <i data-feather="trash"></i>
+                </a>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="sbp-preview-content">
+            <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <img class="card-img-top" src="{{form.pic.url}}" alt="{{post.subject}}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{form.subject}}</h5>
+                                <p class="card-title">{{form.message}}</p>
+                                <a href="/profile/{{form.uploaded_by.id}}">{{form.uploaded_by}}</a>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}

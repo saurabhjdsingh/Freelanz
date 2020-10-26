@@ -1,0 +1,178 @@
+body {
+    font-family: Open Sans,Arial,sans-serif;
+    font-size: 16px;
+    color: #666;
+    line-height: 1.7em;
+    font-weight: 500;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+}
+#section1{
+    margin-top: 5%;
+    background-image: linear-gradient(180deg,#474ab6 0%,#9271f6 100%) !important;
+    padding: 100px 0px;
+}
+.share{
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1.3em;
+    color: white !important;
+    text-align: left;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.p1{
+    margin-bottom: 5.82%;
+    color: #d4ccff !important;
+    line-height: 1.9em;
+    text-align: left;
+    font-size: 16px;
+}
+.mainpic{
+    float: left;
+    margin-top: 5%;
+    width: 420px;
+    height: auto;
+}
+.registerbtn{
+    color: #fff !important;
+    border: 2px solid;
+    border-color: #09e1c0;
+    border-width: 10px !important;
+    border-radius: 100px;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding-right: 2em;
+    padding-left: .7em;
+    background-color: #09e1c0;
+    box-shadow: 0 10px 50px 5px rgba(0,188,160,.6);
+    padding: .3em 1em;
+    line-height: 1.7em !important;
+}
+.registerbtn:hover{
+    color: #fff !important;
+    border: 2px solid;
+    border-color: #09e1c0;
+    border-width: 10px !important;
+    border-radius: 100px;
+    letter-spacing: 2px;
+    font-size: 16px;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding-right: 2em;
+    padding-left: .7em;
+    background-color: #09e1c0;
+    box-shadow: 0 10px 50px 5px rgba(0,188,160,.6);
+    padding: .3em 1em;
+    line-height: 1.7em !important;
+    text-decoration: none;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+.section2{
+    padding: 100px 0px;
+}
+h2{
+    font-weight: 700;
+    font-size: 36px;
+    color: #7272ff !important;
+    line-height: 1.3em;
+}
+h4{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.9em;
+    color: #333;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    text-align: left;
+}
+.rounded{
+    border-top: 4px solid #09e1c0;
+    border-radius: 5px;
+    z-index: 10;
+    width: 100%;
+    box-sizing: border-box;
+}
+.p2{
+    color: #8585bd !important;
+    margin-bottom: 5%;
+    line-height: 1.9em;
+    text-align: left;
+    font-size: 16px;
+}
+.popupbtn{
+    color: #fff !important;
+    border: 2px solid;
+    border-color: #7272ff;
+    border-width: 10px !important;
+    border-radius: 100px;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding-right: 2em;
+    padding-left: .7em;
+    background-color: #7272ff;
+    box-shadow: 0 10px 50px 5px rgba(114,114,255,.4);
+    padding: .3em 1em;
+    line-height: 1.7em !important;
+    margin-top: 5%;
+}
+.popupbtn:hover{
+    color: #fff !important;
+    border: 2px solid;
+    border-color: #7272ff;
+    border-width: 10px !important;
+    border-radius: 100px;
+    letter-spacing: 2px;
+    font-size: 16px;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    padding-right: 2em;
+    padding-left: .7em;
+    background-color: #7272ff;
+    box-shadow: 0 10px 50px 5px rgba(114,114,255,.4);
+    padding: .3em 1em;
+    line-height: 1.7em !important;
+    text-decoration: none;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+    margin-top: 5%;
+}
+
+.space{
+    margin-top: 5%;
+}
+.colup{
+    color: #8585bd !important;
+    line-height: 1.9em;
+    background-color: #fff;
+    padding-top: 30px !important;
+    padding-right: 30px !important;
+    padding-bottom: 30px !important;
+    padding-left: 30px !important;
+    box-sizing: border-box;
+    text-align: left;
+    position: relative;
+    box-shadow:-1px -1px 10px 05px rgba(71,74,182,.12);
+}
+.column {
+  float: left;
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+ /* Responsive layout - when the screen is less than 600px wide, make the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+} 

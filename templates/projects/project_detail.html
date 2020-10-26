@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>{{project.name}}</title>
+{% endblock head %}
+
+{% block body_block %}
+<div id="layoutSidenav_content">
+    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+            <div class="container">
+                <div class="page-header-content pt-4">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto mt-4">
+                            <h1 class="page-header-title">
+                                <div class="page-header-icon"><i data-feather="activity"></i></div>
+                                {{project.name}}
+                            </h1>
+                            <div class="page-header-subtitle">{{project.name}} overview and Project summary</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+<div class="container" style="margin-top:0.5%;">
+<div class="sbp-preview-content">
+<div class="row">
+<div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Budget-Rs.{{project.budget}}<p style="float:right">category: <a href="/projects/{{project.category.name}}">{{project.category.name}}</a></p></h5>
+                <p class="card-title">{{ project.description}}</p>
+                {% if project.file %}
+                <a href="{{project.file.url}}" download>Attachment</a>
+                {% endif %}
+                <span>
+                    {% if project.created_by != request.user %}
+                        {% if not applied %}
+                        <a class="btn bg-gradient-primary-to-secondary btn-md btn-rounded" style="color:white; float:right;" href="/projects/apply/{{project.slug}}">Apply</a>
+                        {% else %}
+                        <a class="btn bg-gradient-primary-to-secondary btn-md btn-rounded" style="color:white; float:right;" href="#!">Already applied</a>
+                        {% endif %}
+                    {% else %}
+                    <a class="btn bg-gradient-primary-to-secondary btn-md btn-rounded" style="color:white; float:right;" href="/projects/bids/{{project.slug}}">Applicants</a>
+                    {% endif %}
+                </span>
+                <h6>by - <span><a href="/profile/{{project.created_by.id}}">{{project.created_by}}</a></span></h6>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}

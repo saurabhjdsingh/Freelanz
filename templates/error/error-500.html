@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+{% extends 'error/error_base.html' %}
+{% load static %}
+{% block head %}
+        <title>500 error - thinkgroupy</title>
+{% endblock head %}
+{% block body_block %}
+<img class="img-fluid p-4" src="{% static 'assets/img/freepik/500-internal-server-error-pana.svg' %}" alt="" />
+<p class="lead">The server encountered an internal error or misconfiguration and was unable to complete your request.</p>
+{% endblock %}

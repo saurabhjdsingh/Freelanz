@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends 'accounts/login_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>Thinkgroupy</title>
+{% endblock head %}
+
+{% block body_block%}
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11">
+                <div class="card my-5">
+                    <div class="card-body text-center"><div class="h1 font-weight-light mb-0"><h1>Confirm Your Account</h1></div></div>
+                    <hr class="my-0" />
+                    <div class="card-body p-5">
+                        <p>We’ve emailed you instructions for setting your Account. If the email you entered exist. You should receive it shortly.</p>
+                        <p>If you don’t receive an email, please make sure you’ve entered the correct address, and check your <strong>spam or Promotions folder.</strong></p>
+                    </div>
+                    <hr class="my-0" />
+                    <div class="card-body px-5 py-4">
+                        <div class="small text-center">
+                            New user?
+                            <a href="/signup">Create an account!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

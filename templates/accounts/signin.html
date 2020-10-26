@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% extends 'accounts/login_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>Thinkgroupy - signin</title>
+{% endblock head %}
+
+{% block body_block%}
+{% load socialaccount %}
+{% providers_media_js %}
+<main>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11">
+                <div class="card my-5">
+                    <div class="card-body p-5 text-center">
+                        <div class="h3 font-weight-light mb-3">Sign In</div>
+                        {% if messages %}
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            {% for message in messages %}
+                            <h5 class="alert-heading">{{ message }}</h5>
+                            {% endfor %}
+                            <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                            </div>
+                        {% endif %}
+                        <a class="btn btn-icon btn-facebook mx-1" href="{% url 'facebook_login' %}"><i class="fab fa-facebook-f fa-fw fa-sm"></i></a>
+                        <a class="btn btn-icon btn-github mx-1" href="{% url 'github_login' %}"><i class="fab fa-github fa-fw fa-sm"></i></a>
+                        <a class="btn btn-icon btn-google mx-1" href="{% url 'google_login' %}"><i class="fab fa-google fa-fw fa-sm"></i></a>
+                        <a class="btn btn-icon btn-twitter mx-1" href="#!"><i class="fab fa-twitter fa-fw fa-sm"></i></a>
+                    </div>
+                    <hr class="my-0" />
+                    <div class="card-body p-5">
+                        <form method="POST" action="">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                <label class="text-gray-600 small" for="emailExample">Username</label>
+                                <input type="text" class="form-control form-control-solid py-4" name="username" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-gray-600 small" for="passwordExample">Password</label>
+                                <input type="password" class="form-control form-control-solid py-4" name="password" required="required">
+                            </div>
+                            <div class="form-group"><a class="small" href="{% url 'accounts:password_reset' %}">Forgot your password?</a></div>
+                            <div>
+                                <div class="custom-control custom-control-solid custom-checkbox">
+                                    <input class="custom-control-input small" id="customCheck1" type="checkbox" name="rememberme" />
+                                    <label class="custom-control-label" for="customCheck1">Remember password</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary" name="signin">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                    <hr class="my-0" />
+                    <div class="card-body px-5 py-4">
+                        <div class="small text-center">
+                            New user?
+                            <a href="signup">Create an account!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,387 @@
+<!--here will start new >
+
+.container-contact
+{    
+    background-color: #3050d1 !important;
+    margin-top: 89px;
+    background-image: url(https://thinkgroupy.in/wp-content/uploads/2020/07/Footer-Bg.png) !important;
+    background-position: center center;  
+    background-size: cover;
+}
+.title-contact-us
+{
+    color:white;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 1.4em;
+    letter-spacing: 3px;
+    padding-top: 65px;
+    padding-bottom: 55px;
+    
+}
+
+.form-control
+{
+    border-radius: 0px !important;
+    
+}
+.form-row input
+{
+    height:50px;
+    
+    font-size: 16px !important;
+    font-weight: 700;
+}
+.textarea-contact-form textarea
+{
+    color:#999 !important;
+    font-size: 16px !important;
+    font-weight: 700;
+}
+::placeholder
+{
+    color: rgba(104,109,131,0.6) !important;
+}
+.submit-btn
+{
+    margin-top: 20px;
+    margin-bottom: 70px;
+    background:#faa152 !important;
+    padding: 0.3em 1em!important;
+    border-width: 12px!important;
+    border-color: #faa152 !important;
+    color: #ffffff !important;
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    font-weight:600!important;
+    float:right;
+
+}
+.row-col2 .col-md-6
+{
+    padding-left: 20px !important;
+}
+.blurb-icon
+{
+    padding-bottom:20px;
+}
+.contact-icons
+{
+    padding:7px 8px 7px 8px;
+    background: #ffffff;
+    border-radius:50%;
+    margin-right:10px;
+    
+    }
+.contact-icons2
+{
+    padding:7px 9px 7px 9px;
+    background: #ffffff;
+    border-radius:50%;
+    margin-right:10px;
+}
+.contact-icons3
+{
+    padding:7px 11px 7px 10px;
+    background: #ffffff;
+    border-radius:50%;
+    margin-right:10px;
+}
+.contact-icons i
+{
+    font-size: 18px !important;
+    color: #3050D1;
+}
+
+.fa-map-marker, .fa-phone
+{
+    font-size: 20px!important;
+    color: #3050D1;
+}
+
+<!-- finishes here->
+
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: Open Sans, Arial, sans-serif;
+  font-size: 16px;
+  color: #666;
+  background-color: #fff;
+  line-height: 1.7em;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+    text-decoration: none;
+    font-size: 16px;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+p {
+  font-size: 16px;
+}
+
+/*banner part*/
+.main_body{
+    margin-top:89px;
+}
+
+.banner {
+  color: #fff;
+  padding: 100px 0;
+  background-blend-mode: overlay;
+  background-image: url('../img/coding-background-texture.jpg'),
+    linear-gradient(180deg, #474ab6 0%, #9271f6 100%) !important;
+}
+
+.banner a {
+  color: #ffffff !important;
+  border-width: 10px !important;
+  border-color: #09e1c0;
+  border-radius: 100px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  background-color: #09e1c0;
+  padding: 10px 20px;
+}
+
+.banner-img {
+  width: 100%;
+}
+
+.banner-text {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.banner-text h1 {
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 1.3em;
+}
+
+/*courses part*/
+
+.courses-text h1 {
+  font-weight: 700;
+  font-size: 36px;
+  color: #7272ff !important;
+  line-height: 1.3em;
+}
+
+.courses-text h4 {
+  color: #727272;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.9em;
+}
+
+.courses-text p {
+  line-height: 1.9rem;
+}
+
+.courses-text a {
+  color: #ffffff !important;
+  border-width: 10px !important;
+  border-color: #7272ff;
+  border-radius: 100px;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  background-color: #7272ff;
+  box-shadow: 0px 10px 50px 5px rgba(114, 114, 255, 0.4);
+  transition: all 300ms ease 0ms;
+  padding: 10px 20px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .courses-text a {
+    font-size: 11px;
+  }
+}
+
+.course-img img {
+  width: 70px;
+  margin-bottom: 20px;
+}
+
+.courses-text {
+  margin-bottom: 100px;
+  padding-right: 50px;
+}
+
+.course-rest h1 {
+  font-weight: 700;
+  color: #696969 !important;
+  line-height: 1.5em;
+  font-size: 20px;
+}
+
+.course-rest p {
+  color: #8585bd !important;
+  line-height: 2rem;
+  font-weight: 550;
+}
+
+.courses {
+  box-shadow: inset -1px -1px 0px 0px rgba(71, 74, 182, 0.12);
+  padding-top: 20px;
+  margin-left: 15px;
+}
+
+.course-desc {
+  box-shadow: 0px 10px 50px 5px rgba(114, 114, 255, 0.4);
+}
+
+.expert {
+  color: #fff;
+  padding: 100px 0;
+  background-blend-mode: overlay;
+  background-image: url('../img/coding-background-texture.jpg'),
+    linear-gradient(180deg, #474ab6 0%, #9271f6 100%) !important;
+}
+
+.expert-img img {
+  width: 90%;
+}
+
+@media only screen and (min-width: 620px) {
+  .expert .container {
+    margin: 50px;
+  }
+}
+
+.expert-text h1 {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.3em;
+}
+
+.expert-text p {
+  line-height: 2rem;
+  color: #d4ccff !important;
+}
+
+.expert-text,
+.learn-text {
+  margin: 100px 0;
+}
+
+.learn-text img {
+  width: 70px;
+}
+
+.learn {
+  margin: 100px 0;
+}
+
+.learn-text h1 {
+  font-weight: 600;
+  font-size: 36px;
+  color: #7272ff !important;
+  line-height: 1.3em;
+}
+
+.learn-text p:last-child {
+  line-height: 2rem;
+  color: #8585bd !important;
+}
+
+.before-green {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.before-green:before {
+  position: absolute;
+  content: '';
+  left: 0;
+  bottom: -20px;
+  height: 4px;
+  width: 50px;
+  background-color: #09e1c0;
+}
+
+.footer {
+  padding: 100px 0 0;
+  background-color: #f7f8fc !important;
+}
+
+.footer h1 {
+  font-weight: 700;
+  font-size: 36px;
+  color: #7272ff !important;
+  line-height: 1.3em;
+  margin-bottom: 50px;
+}
+
+.footer p {
+  font-size: 20px;
+  margin-bottom: 50px;
+  color: #8585bd !important;
+}
+
+.link-one {
+  color: #ffffff !important;
+  border-width: 10px !important;
+  border-color: #7272ff;
+  border-radius: 100px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  background-color: #7272ff;
+  box-shadow: 0px 10px 50px 5px rgba(114, 114, 255, 0.4);
+  transition: all 300ms ease 0ms;
+  padding: 15px 25px;
+  margin-right: 40px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.link-two {
+  color: #7272ff !important;
+  display: inline-block;
+  border-width: 10px !important;
+  border-color: #7272ff;
+  border-radius: 100px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  background-color: #fff;
+  box-shadow: 0px 10px 50px 5px rgba(114, 114, 255, 0.4);
+  transition: all 300ms ease 0ms;
+  padding: 15px 25px;
+}
+
+.hover-effect:hover {
+  transition: 0.4s linear;
+  letter-spacing: 2px;
+}
+
+.course-desc {
+  margin-left: 5px;
+}
+
+.footer-pic {
+  width: 100%;
+  height: 100px;
+}

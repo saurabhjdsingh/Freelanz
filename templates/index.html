@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block body_block %}
+<div class ="main_body">
+<div class="banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 banner-text">
+            <h1 class="mb-5">
+              Share your knowledge for other <em>Technology</em>
+            </h1>
+            <p class="mb-5">
+              Have knowledge & experience in your respective field then share it
+              to the world , make money of your choice & ask money from big
+              companies by solving there problems.
+            </p>
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard:dashboard' %}" class="hover-effect">
+                DASHBOARD <i class="fas fa-caret-right"></i>
+                 </a>
+            {% else %}
+                 <a href="signup" class="hover-effect">
+                REGISTER OR LOGIN <i class="fas fa-caret-right"></i>
+                 </a>
+            {% endif %}
+          </div>
+          <div class="col-lg-6">
+            <img class="banner-img" src="{% static 'pics/coding-isometric-01.png' %}" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="courses-section mt-5 mb-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-12 col-sm-12 courses-text">
+            <div class="relative-parent">
+              <h1 class="before-green">
+                100’s of Courses
+              </h1>
+            </div>
+            <h4 class="mt-3">
+              Get all free courses of your interest just for free from all big
+              companies
+            </h4>
+            <p class="mt-4 mb-5">
+              Here,you will be provided with 100’s of free courses from big
+              experienced companies such as udemy ,linkedin learning ,
+              codeacedmy ,etc.
+            </p>
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard:dashboard' %}" class="hover-effect">
+                DASHBOARD <i class="fas fa-caret-right"></i>
+                 </a>
+            {% else %}
+                 <a class="hover-effect" href="signin">
+                LOGIN TO VIEW ALL COURSES <i class="fas fa-caret-right"></i>
+                </a>
+            {% endif %}
+          </div>
+          <div class="row col-lg-8 col-md-12 col-sm-12 course-desc">
+            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
+              <div class="course-img col-lg-4">
+                <img src="{% static 'pics/coding-icon_8.jpg' %}" alt="" />
+              </div>
+              <div class="course-rest col-lg-8">
+                <h1>
+                  Web Development
+                </h1>
+                <p>
+                  Web development broadly refers to the tasks associated with
+                  developing websites for hosting via intranet or internet. The
+                  web development process includes web design, web content
+                  development, client-side/server-side scripting and network
+                  security configuration, among other tasks.
+                </p>
+              </div>
+            </div>
+            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
+              <div class="course-img col-lg-4">
+                <img src="{% static 'pics/coding-icon_4.jpg' %}" alt="" />
+              </div>
+              <div class="course-rest col-lg-8">
+                <h1>
+                  Debugging
+                </h1>
+                <p>
+                  Debugging is the routine process of locating and removing
+                  computer program bugs, errors or abnormalities, which is
+                  methodically handled by software programmers via debugging
+                  tools. Debugging checks, detects and corrects errors or bugs
+                  to allow proper program operation according to set
+                  specifications.
+                </p>
+              </div>
+            </div>
+            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
+              <div class="course-img col-lg-4">
+                <img src="{% static 'pics/coding-icon_1.jpg' %}" alt="" />
+              </div>
+              <div class="course-rest col-lg-8">
+                <h1>
+                  Python
+                </h1>
+                <p>
+                  Use python videos to explore the python world & then use it
+                </p>
+              </div>
+            </div>
+            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
+              <div class="course-img col-lg-4">
+                <img src="{% static 'coding-icon_7.jpg' %}" alt="" />
+              </div>
+              <div class="course-rest col-lg-8">
+                <h1>
+                  Javascript
+                </h1>
+                <p>
+                  Fix Javascript for others for earning
+                </p>
+              </div>
+            </div>
+            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
+              <div class="course-img col-lg-4">
+                <img src="{% static 'img/coding-icon_3.jpg' %}" alt="" />
+              </div>
+              <div class="course-rest col-lg-8">
+                <h1>
+                  UX Design
+                </h1>
+                <p>
+                  the design of the entire process of acquiring and integrating
+                  the product, including aspects of branding, design, usability
+                  and function.
+                </p>
+              </div>
+            </div>
+            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
+              <div class="course-img col-lg-4">
+                <img src="{% static 'pics/coding-icon_5.jpg' %}" alt="" />
+              </div>
+              <div class="course-rest col-lg-8">
+                <h1>
+                  Database Design
+                </h1>
+                <p>
+                  The designer determines what data must be stored and how the
+                  data elements interrelate.
+                </p>
+              </div>
+            </div>
+            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
+              <div class="course-img col-lg-4">
+                <img src="{% static 'pics/coding-icon_2.jpg' %}" alt="" />
+              </div>
+              <div class="course-rest col-lg-8">
+                <h1>
+                  HTML & CSS
+                </h1>
+                <p>
+                  Fix problems with the HTML & css of other big gaint & earn
+                  money
+                </p>
+              </div>
+            </div>
+            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
+              <div class="course-img col-lg-4">
+                <img src="{% static 'pics/coding-icon_6.jpg' %}" alt="" />
+              </div>
+              <div class="course-rest col-lg-8">
+                <h1>
+                  Apps & Games
+                </h1>
+                <p>
+                  learn & try to do experiments with apps & games then convert
+                  your talent into money
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="expert">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 expert-img">
+            <img src="{% static 'pics/coding-isometric-02.png' %}" alt="" />
+          </div>
+          <div class="col-lg-6 expert-text">
+            <div class="relative-parent">
+              <h1 class="before-green">Become an expert</h1>
+            </div>
+            <br />
+            <p>
+              Create your group & earn maximum points in that group to become
+              group leader & also reach in the expert list .
+            </p>
+            <p>
+              <strong
+                >experts will get every query regarding the companies first &
+                then it will reach to the other groups & on ground
+                level.</strong
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="learn">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 learn-text">
+            <img
+              src="{% static 'pics/logo.jpg' %}"
+              class="mb-3"
+              alt=""
+            />
+            <div class="relative-parent">
+              <h1 class="before-green">Learn by Doing</h1>
+            </div>
+            <br />
+            <p>
+              <b>Learn before doing anything in the real world</b>
+            </p>
+            <p>
+              When you will do and practice the fixing in real world then you
+              will gain experience & knowledge with complete experience will
+              give you a lot of luxury in life.
+            </p>
+          </div>
+          <div class="col-lg-6 expert-img">
+            <img src="{% static 'pics/coding-isometric-03.png' %}" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="learn mb-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 expert-img">
+            <img src="{% static 'pics/coding-isometric-04.png' %}" alt="" />
+          </div>
+          <div class="col-lg-6 learn-text">
+            <img
+              src="{% static 'pics/coding-iconArtboard-19-copy-9.jpg' %}"
+              class="mb-3"
+              alt=""
+            />
+            <div class="relative-parent">
+              <h1 class="before-green">Build your Group portfolio</h1>
+            </div>
+            <br />
+            <p>
+              <b
+                >Build portfolio for your group in order to earn more attraction
+                from companies & earn order from them.</b
+              >
+            </p>
+            <p>
+              leader will have the right to change the group portfolio + the
+              person who is the owner of the group will have the right to do so.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="learn mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 learn-text">
+            <img
+              src="{% static 'pics/coding-iconArtboard-19-copy-10.jpg' %}"
+              class="mb-3"
+              alt=""
+            />
+            <div class="relative-parent">
+              <h1 class="before-green">Achieve your goals</h1>
+            </div>
+            <br />
+            <p>
+              <b
+                >Complete your goals on time & then earn money as promissed on
+                time.</b
+              >
+            </p>
+            <p>
+              All members who have granted any kind of help in the project
+              according to the respected ratio will earn in there respected
+              ratio money only.
+            </p>
+          </div>
+          <div class="col-lg-6 expert-img">
+            <img src="{% static 'pics/coding-isometric-05.png' %}" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h1>
+              Ready to get started?
+            </h1>
+            <p>
+              Get in touch, or create an account
+            </p>
+          </div>
+          <div class="col-md-6">
+            <a class="link-one hover-effect" href="signup">CREATE ACCOUNT</a>
+            <a class="link-two hover-effect" href="contact">CONTACT US</a>
+          </div>
+        </div>
+      </div>
+      <img src="{% static 'pics/download.svg' %}" class="footer-pic" alt="" />
+    </div>
+</div>
+ {% endblock %}

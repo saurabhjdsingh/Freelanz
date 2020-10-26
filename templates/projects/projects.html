@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>Thinkgroupy|Projects</title>
+{% endblock head %}
+
+{% block body_block %}
+<div id="layoutSidenav_content">
+    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <div class="container-fluid">
+            <div class="page-header-content">
+                <div class="row align-items-center justify-content-between pt-3">
+                    <div class="col-auto mb-3">
+                        <h1 class="page-header-title">
+                            <div class="page-header-icon"><i data-feather="user"></i></div>
+                            All Projects
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="sbp-preview-content">
+            <div class="row">
+                {% for project in projects %} 
+                    <div  style="margin-top:1%" class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{project.name}}  <a href="/profile/{{project.created_by.id}}" style="float:right">- {{project.created_by}}</a></h5>
+                                <a href="/projects/project/{{project.slug}}">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+</div>
+{% endblock %}

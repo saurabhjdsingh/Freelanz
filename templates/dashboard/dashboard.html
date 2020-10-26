@@ -1,0 +1,175 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+{% block body_block %}
+<div id="layoutSidenav_content">
+<header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+    <div class="container">
+        <div class="page-header-content pt-4">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-auto mt-4">
+                    <h1 class="page-header-title">
+                        <div class="page-header-icon"><i data-feather="activity"></i></div>
+                        Dashboard
+                    </h1>
+                    <div class="page-header-subtitle">dashboard overview and content summary</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container mt-n10">
+    <div class="row">
+        <div class="col-xxl-4 col-xl-12 mb-4">
+            <div class="card h-100">
+                <div class="card-body h-100 d-flex flex-column justify-content-center py-5 py-xl-4">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 col-xxl-12">
+                            <div class="text-center px-4 mb-4 mb-xl-0 mb-xxl-4">
+                                <h1 class="text-primary">Welcome Back!</h1>
+                                <p class="text-gray-700 mb-0">It's time to get started! View new opportunities now, or continue on your previous work.</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-xxl-12 text-center"><img class="img-fluid" src="{% static 'assets/img/freepik/at-work-pana.svg' %}" style="max-width: 26rem;" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-4 col-xl-6 mb-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    Recent Activity
+                </div>
+                <div class="card-body" style="height: 200px; overflow-y: auto;">
+                    <div class="timeline timeline-xs">
+                        {% if notifications|length != 0 %}
+                            {% for i in notifications %}
+                        <div class="timeline-item">
+                            <div class="timeline-item-marker">
+                                <div class="timeline-item-marker-text">{{i.created_at}}</div>
+                                <div class="timeline-item-marker-indicator bg-green"></div>
+                            </div>
+                            <div class="timeline-item-content">
+                                {{i.notification}}
+                            </div>
+                        </div>
+                        {%endfor%}
+                        {%endif%}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-4 col-xl-6 mb-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    Progress Tracker
+                    <div class="dropdown no-caret">
+                        <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="text-gray-500" data-feather="more-vertical"></i></button>
+                        <div class="dropdown-menu dropdown-menu-right animated--fade-in-up" aria-labelledby="dropdownMenuButton" style="height: auto; overflow-y: auto;">
+                            <a class="dropdown-item" href="/projects/new/">
+                                <div class="dropdown-item-icon"><i class="text-gray-500" data-feather="plus-circle"></i></div>
+                                Add New Project
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="height: 200px;overflow-y: auto;">
+                    {% if time != "no" %}
+                    {% for prog in time %}
+                    <h4 class="small">
+                        Order: {{prog.0}}
+                        <span class="float-right font-weight-bold">{% widthratio 100 prog.1 1 %} Days Left!</span>
+                    </h4>
+                    <div class="progress"><div class="progress-bar bg-success" role="progressbar" style="width: {{prog.1}}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div>
+                {% endfor %}
+                    {% else %}
+                    <h1 class="small">
+                        Active Order:
+                        <span class="float-right font-weight-bold">0</span>
+                    </h1>
+                    {% endif %}
+                </div>
+                <a class="card-footer" href="/projects/my">
+                    <div class="d-flex align-items-center justify-content-between small text-body">
+                        Visit Projects
+                        <i data-feather="arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-3 col-lg-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="mr-3">
+                            <div class="text-white-75 small">Earnings (Monthly)</div>
+                            <div class="text-lg font-weight-bold">Rs. {{monthly}}</div>
+                        </div>
+                        <i class="feather-xl text-white-50" data-feather="calendar"></i>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="{% url 'projects:orders' %}">View orders</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-lg-6">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="mr-3">
+                            <div class="text-white-75 small">Earnings (Annual)</div>
+                            <div class="text-lg font-weight-bold">Rs. {{yearly}}</div>
+                        </div>
+                        <i class="feather-xl text-white-50" data-feather="dollar-sign"></i>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="{% url 'projects:orders' %}">View orders</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-lg-6">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="mr-3">
+                            <div class="text-white-75 small">Order Completion</div>
+                            <div class="text-lg font-weight-bold">{{com}}</div>
+                        </div>
+                        <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-lg-6">
+            <div class="card bg-danger text-white mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="mr-3">
+                            <div class="text-white-75 small">Active Chats</div>
+                            <div class="text-lg font-weight-bold">{{inboxforchat|add:unreadforchat|length}}</div>
+                        </div>
+                        <i class="feather-xl text-white-50" data-feather="message-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if plot != "no" %}
+    <div class="row">
+        <div class="col-xl-6 mb-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">Earnings Breakdown</div>
+                
+                 <img src="data:image/png;base64, {{ plot }}">
+                
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

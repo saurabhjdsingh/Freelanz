@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>Thinkgroupy | {{ second_user.username }} Files</title>
+{% endblock head %}
+{% block body_block %}
+
+<div id="layoutSidenav_content">
+    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <div class="container-fluid">
+            <div class="page-header-content">
+                <div class="row align-items-center justify-content-between pt-3">
+                    <div class="col-auto mb-3">
+                        <h1 class="page-header-title">
+                            <div class="page-header-icon"><i data-feather="user"></i></div>
+                            Files Box
+                            <p id="typing-info"></p>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        {% if message %}
+        <div class="row" style="margin-top:1%;">
+            <div class="col-xl-4">
+                    <div class="card">
+                        <div class="card-header">Files shared by Both</div>
+                        <div class="card-body text-center">
+                            <p>
+                                {{ message }}
+                            </p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="row" style="margin-top:1%;">
+            <div class="col-xl-4">
+                    <div class="card">
+                        <div class="card-header">Files shared by you</div>
+                        <div class="card-body text-center">
+                            <div>
+                                {% if files_1 %}
+                                    {% for file in files_1 %}
+                                <div>
+                                    <a href="{{file.file.url}}">{{ file.name }}</a>
+                                </div>
+                                    {% endfor %}
+                                {% else %}
+                                <div>
+                                    <p>
+                                        No Files Shared by you
+                                    </p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-xl-8">
+                    <div class="card">
+                        <div class="card-header">Files shared by {{ second_user }}</div>
+                        <div class="card-body text-center">
+                            <div>
+                                {% if files_2 %}
+                    
+                                    {% for file in files_2 %}
+                                    <div>
+                                          
+                                        <a href="{{file.file.url}}">{{file.name}}</a>
+                                    </div>
+                                    {% endfor %}
+                                {% else %}
+                                <div>
+                                    <p>
+                                        No Files Shared by {{ second_user.username }}
+                                    </p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

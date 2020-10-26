@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>{{user.username}} - profile</title>
+        {% endblock head %}
+{% block body_block %}
+ 
+<div id="layoutSidenav_content">
+                <main>
+                    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+                        <div class="container-fluid">
+                            <div class="page-header-content">
+                                <div class="row align-items-center justify-content-between pt-3">
+                                    <div class="col-auto mb-3">
+                                        <h1 class="page-header-title">
+                                            <div class="page-header-icon"><i data-feather="user"></i></div>
+                                            Account Security -<a href="editprofile">{{user.username}}</a>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if messages %}
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            {% for message in messages %}
+                            <h5 class="alert-heading">{{ message }}</h5>
+                            {% endfor %}
+                            <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                            </div>
+                        {% endif %}
+                    </header>
+                    <div class="container mt-4">
+                        <nav class="nav nav-borders">
+                            <a class="nav-link ml-0" href="/editprofile">Profile</a>
+                            <a class="nav-link" href="/billing">billing</a>
+                            <a class="nav-link active" href="/security">Security</a>
+                        </nav>
+                        <hr class="mt-0 mb-4" />
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-header">Change Password</div>
+                                    <div class="card-body">
+                                        <form method="POST" action="change_password">
+                                        {% csrf_token %}
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="currentPassword">Current Password</label>
+                                                <input class="form-control" id="currentPassword" type="password" placeholder="Enter current password" name="old_password" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="newPassword">New Password</label>
+                                                <input class="form-control" id="newPassword" type="password" placeholder="Enter new password" name="new_password1" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="confirmPassword">Confirm Password</label>
+                                                <input class="form-control" id="confirmPassword" type="password" placeholder="Confirm new password" name="new_password2"/>
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card mb-4">
+                                    <div class="card-header">Security Preferences</div>
+                                    <div class="card-body">
+                                        <h5 class="mb-1">Account Privacy</h5>
+                                        <p class="small text-muted">By setting your account to private, your profile information and posts will not be visible to users outside of your user groups.</p>
+                                        <form>
+                                            <div class="custom-control custom-radio">
+                                                <input class="custom-control-input" id="radioPublic" type="radio" name="radioPrivacy" checked />
+                                                <label class="custom-control-label" for="radioPublic">Public (posts are available to all users)</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input class="custom-control-input" id="radioPrivate" type="radio" name="radioPrivacy" />
+                                                <label class="custom-control-label" for="radioPrivate">Private (posts are available to only users in your groups)</label>
+                                            </div>
+                                        </form>
+                                        <hr class="my-4" />
+                                        <h5 class="mb-1">Data Sharing</h5>
+                                        <p class="small text-muted">Sharing usage data can help us to improve our products and better serve our users as they navigation through our application. When you agree to share usage data with us, crash reports and usage analytics will be automatically sent to our development team for investigation.</p>
+                                        <form>
+                                            <div class="custom-control custom-radio">
+                                                <input class="custom-control-input" id="radioUsageYes" type="radio" name="radioUsage" checked />
+                                                <label class="custom-control-label" for="radioUsageYes">Yes, share data and crash reports with app developers</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input class="custom-control-input" id="radioUsageNo" type="radio" name="radioUsage" />
+                                                <label class="custom-control-label" for="radioUsageNo">No, limit my data sharing with app developers</label>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-header">Change Email</div>
+                                    <div class="card-body">
+                                        <form method="POST" action="{% url 'dashboard:EmailUpdate' %}">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                                <label class="small mb-1" >Email</label>
+                                                <input class="form-control" type="email" placeholder="Enter New Email" required name="email"/>
+                                            </div>
+                                        <button class="btn btn-primary" type="submit">save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card mb-4">
+                                    <div class="card-header">Change Phone Number</div>
+                                    <div class="card-body">
+                                        <form method="POST" action="{% url 'dashboard:PhoneUpdate' %}">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                                <label class="small mb-1">Number</label>
+                                                <input class="form-control" type="tel" placeholder="Enter New Number" required name="phone"/>
+                                            </div>
+                                        <button class="btn btn-primary" type="submit">save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card mb-4">
+                                    <div class="card-header">Delete Account</div>
+                                    <div class="card-body">
+                                        <p>Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, select the button below.</p>
+                                        <form method="POST" action="delete/profile/{{user.id}}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-danger-soft text-danger" type="submit">I understand, delete my account</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+{% endblock %}

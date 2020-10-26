@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>Thinkgroupy | Payment gateway</title>
+{% endblock head %}
+{% block body_block %}
+
+<div id="layoutSidenav_content">
+<main>
+    <div class="container">
+        <div class="row" style="margin-top:1%;">
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-header">Project Details</div>
+                    <div class="card-body">
+                        <div class="modal-body">
+                            <h5>Project Details</h5>
+                            <p>Name : {{project.name}}</p>
+                            <p>Description : {{ project.description }}</p>
+                            <p>Project Budget: Rs. {{project.budget}}</p>
+                            <h5>Bid Details</h5>
+                            <p>User : {{bid.created_by}}</p>
+                            <p>Bid Description : {{ bid.description }}</p>
+                            <p>Bid final cost : Rs. {{bid.budget}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">Confirm payment</div>
+                    <div class="card-body text-center">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Confirm Payment</h5>
+                                    </div>
+                                <div class="modal-body">
+                                    <h5>Payment Details</h5>
+                                    <p>Bid Amount: + Rs. {{bid.budget}}</p>
+                                    <p>Service Fee: + Rs. 100</p>
+                                    <p>Refund: - Rs. {{refund.budget}}</p>                                   
+                                    <p>Total Payment : Rs. {{amount|add:100}}</p>
+                                    <form action="/payments/confirmpayment/" method="POST">
+                                        {% csrf_token %}
+                                        <input name="projectname" value="{{project.name}}" type="hidden">
+                                        <input name="price" value="{{ amount|add:100 }}" type="hidden">
+                                        <input name="payedto" value="{{bid.created_by}}" type="hidden">
+                                        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_HZxFaqOlnavM73" data-amount="{% widthratio amount|add:100 1 100 %}" data-currency="INR" data-buttontext="Pay Securely" data-name="Thinkgroupy" data-description="Order & start project" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRpWzPOB8s9WRX7JXZ96x1oPESu-eoN5YUFfDKcebTKFn7piPBS&usqp=CAU">
+                                        </script>
+                                        <input type="hidden" custom="Hidden Element" name="hidden">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

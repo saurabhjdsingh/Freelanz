@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>{{user.username}} -Apply for Project</title>
+        {% endblock head %}
+{% block body_block %}
+
+<div id="layoutSidenav_content">
+    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <div class="container-fluid">
+            <div class="page-header-content">
+                <div class="row align-items-center justify-content-between pt-3">
+                    <div class="col-auto mb-3">
+                        <h1 class="page-header-title">
+                            <div class="page-header-icon"><i data-feather="user"></i></div>
+                            Apply for Project -
+                            <a href="{{user.profile.id}}"> {{user.username}}</a>
+                            
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card mb-4">
+                    <div class="card-header">Apply For Project</div>
+                    <div class="card-body">
+                        <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.media}}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1">Bid amount (Rs.)</label>
+                                    <input class="form-control" type="number" name="budget" min="0"/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="small mb-1">Description</label>
+                                    <textarea class="form-control" type="text" name="description"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="small mb-1">No. of days needed</label>
+                                    <input class="form-control" type="date" name="date_time">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Apply</button>
+                </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

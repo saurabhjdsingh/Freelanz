@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>Thinkgroupy</title>
+{% endblock head %}
+
+{% block body_block %}
+<div id="layoutSidenav_content">
+    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+            <div class="container">
+                <div class="page-header-content pt-4">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-auto mt-4">
+                            <h1 class="page-header-title">
+                                Project-
+                                {{projects.name}}
+                            </h1>
+                            <div class="page-header-subtitle">Applicants overview and summary</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </header>
+    {% if bids %}
+    <div class="container" style="margin-top:0.5%;">
+        <div class="sbp-preview-content">
+            {% for bids in bids %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Budget-Rs.{{bids.budget}}</h5>
+                            <p class="card-title">{{bids.description}}</p>
+                            <span>
+                            <div class="form-group col-md-6">
+                                <label class="small mb-1">Approx. Time</label>
+                                <input class="form-control" placeholder="{{ bids.date_time }}" disabled="" />
+                            </div>
+                            </span>
+                            <h6>by -<span><a href="/profile/{{bids.created_by.id}}">{{bids.created_by}}</a></span></h6>
+                            <a class="btn bg-primary btn-md btn-rounded" style="color:white; float:right;" href="/chat/{{bids.created_by}}" >chat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div class="container" style="margin-top:0.5%;">
+        <div class="sbp-preview-content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                Sorry! No Applicants have applied yet....
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

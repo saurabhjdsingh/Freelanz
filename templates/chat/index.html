@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>Thinkgroupy | {{ second_user.username }}</title>
+{% endblock head %}
+{% block body_block %}
+
+<div id="layoutSidenav_content">
+    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <div class="container-fluid">
+            <div class="page-header-content">
+                <div class="row align-items-center justify-content-between pt-3">
+                    <div class="col-auto mb-3">
+                        <h1 class="page-header-title">
+                            <div class="page-header-icon"><i data-feather="user"></i></div>
+                            Chat-<a href="/profile/{{ second_user.id }}">{{ second_user.username }}</a>
+                            {% if order != "no" %}
+                                <div style="margin-left:520px; margin-top:16px;">
+                                    {% if order.worker.username == second_user.username %}
+                                    <p> You have hired this person</p>
+                                    <p>To cancel this order kindly <a href="/contact">Contact-Us</a></p>
+                                    {% if orderfiles != "no" %}
+                                    <form method="POST" action="complete/">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{order.bid.project.name}}" name="projectname">
+                                    <input type="hidden" value="{{order.bid.created_by}}" name="bidder">
+                            <button class="btn bg-gradient-primary-to-secondary btn-md btn-rounded" type="submit" style="color:white" >Complete the order</button>
+                            </form>
+                                    {% endif %}
+                                {% else %}
+                                    <p>You have been hired by this person</p>
+                                    <p>To cancel this order kindly <a href="/contact">Contact-Us</a></p>
+                                {%endif%}
+                                </div>
+                            {% endif%}
+                            <p id="typing-info"></p>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">Profile Picture</div>
+                    <div class="card-body text-center">
+                        <img class="img-account-profile rounded-circle mb-2" src="{{ second_user.profile.image.url }}" alt="" />
+                        <div>
+                        {% if is_followed %}
+                        <a class="btn bg-danger btn-md btn-rounded" style="color:white" href="/profile/unfollow/{{second_user.id}}" >unfollow</a>
+                        {% else %}
+                        <a class="btn bg-gradient-primary-to-secondary btn-md btn-rounded" style="color:white" href="/profile/follow/{{second_user.id}}">Follow</a>
+                        {% endif %}
+                        </div>
+                        <div style="margin-top:29%;">
+                            <form method="POST" action="/chat/{{second_user}}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="file" name="file" required>
+                            <button class="btn bg-gradient-primary-to-secondary btn-md btn-rounded" type="submit" style="color:white" target="_blank">Share file</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-header">
+                        {{second_user.username}}
+                        <div style="float: right;">
+                            <form method="POST" action="/chat/video/" enctype="multipart/form-data" target="_blank">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{room_name}}" name="room">
+                                <input type="hidden" value="{{second_user.username}}" name="user">
+                                <button id ="call" class="btn bg-blue btn-rounded" type="submit" style="color:black">
+                                <div class="nav-link-icon"><i data-feather="video"></i></div>
+                                </button>
+                            </form>
+                        </div>
+                        <div style="float: right;">
+                            <form method="POST" action="/chat/join/" enctype="multipart/form-data" target="_blank">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{room_name}}" name="room">
+                                <input type="hidden" value="{{second_user.username}}" name="user">
+                                <button id ="call" class="btn bg-blue btn-rounded" type="submit" style="color:black">
+                                    <div class="nav-link-icon"><i data-feather="user-plus"></i></div>
+                                </button>
+                            </form>
+                        </div>
+                        {% if projects != "no" %}
+                        <button class="btn btn-green-soft" type="button" data-toggle="modal" data-target="#staticBackdrop">Hire</button>
+                        <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Hire {{second_user.username}}</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5>Project Details</h5>
+                                        {%if projects|length == 1 %}
+                                        {% for i in projects %}
+                                        <p>Project Name: {{i.0}}</p>
+                                        <p>Project description: {{i.1}}</p>
+                                        <h5>Bid details</h5>
+                                        <p>Bidder descirption: {{i.2}}</p>
+                                        <p>Bidder Amount: Rs.{{i.3}}</p>
+                                        <p>Bidder Finishing Time: {{i.4}}</p> 
+                                        <form action="/payments/{{i.5}}/{{i.6}}" method="POST">
+                                            {% csrf_token %}
+                                            <input value="{{second_user.username}}" name="bidder" type="hidden">
+                                            <input value="{{room_name}}" name="room" type="hidden">
+                                            <input value="{{i.0}}" name="projectname" type="hidden">
+                                            <input value="{{second_user.username}}" name="userpayed" type="hidden">
+                                            <input name="budget" type="hidden" value="{{i.3}}">
+                                            <button class="btn bg-blue btn-rounded" style="color:white;" type="submit">Confirm</button>
+                                        </form>
+                                        {% endfor %}
+                                        {% else %}
+                                    </div>
+                                    <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Please select a Project</label>
+                                    <select class="form-control form-control-solid" id="projectchoose" id="exampleFormControlSelect1">
+                                    {% for i in projects %}
+                                    <option name="choice1" value="project{{forloop.counter0}}">{{i.0}}</option>
+                                    {% endfor %}
+                                    </select>
+                                    </div>
+                                    {% for i in projects %}
+                                    <div style="display:none;" id="project{{forloop.counter0}}" class="condition">       
+                                        <p>Project Name: {{i.0}}</p>
+                                        <p>Project description: {{i.1}}</p>
+                                        <h5>Bid details</h5>
+                                        <p>Bidder descirption: {{i.2}}</p>
+                                        <p>Bidder Amount: Rs.{{i.3}}</p>
+                                        <p>Bidder Finishing Time: {{i.4}}</p>
+                                   
+                                    <form action="/payments/{{i.5}}/{{i.6}}" method="POST">
+                                            {% csrf_token %}
+                                            <input value="{{second_user.username}}" name="bidder" type="hidden">
+                                            <input value="{{room_name}}" name="room" type="hidden">
+                                            <input value="{{i.0}}" name="projectname" type="hidden">
+                                            <input value="{{second_user.username}}" name="userpayed" type="hidden">
+                                            <input name="budget" type="hidden" value="{{i.3}}">
+                                            <button class="btn bg-blue btn-rounded" style="color:white;" type="submit">Confirm</button>
+                                        </form>
+                                         </div>
+                                    {% endfor %}
+                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                                <script>
+                                    $('#projectchoose').change(function () {
+                                        var value = this.value;
+                                        var loop = {{projects|length|safe}};
+                                        $('.condition').hide()
+                                        $('#'+value).show()
+                                
+                                    });
+                                </script>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if edit != "no" %}
+                        <button class="btn btn-green-soft" type="button" data-toggle="modal" data-target="#staticBackdrop1">Edit bid</button>
+                        <div class="modal fade" id="staticBackdrop1" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel2" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel2">Edit Bid</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                    {% if edit|length == 1 %}
+                                    {% for i in edit %}
+                                    <div class="modal-body">
+                                        <h5>Biding details</h5>
+                                        <p>descirption: {{i.0}}</p>
+                                        <p>Bidder Amount: Rs.{{i.1}}</p>
+                                        <p>Bidder Finishing Time: {{i.2}}</p>
+                                        <form action="editbid/" method="POST">
+                                        {% csrf_token %}
+                                            <input value="{{second_user.username}}" name="user" type="hidden">
+                                            <input name="budget" type="number">
+                                            <input name="date" type="date">
+                                            <input name="project" value="{{i.3}}" type="hidden" name="project">
+                                            <button class="btn bg-blue btn-rounded" style="color:white;" type="submit" onclick="order()">Confirm</button>
+                                        </form>
+                                    </div>
+                                    {% endfor %}
+                                    {%else%}
+                                    <div class="modal-body">
+                                        <label for="exampleFormControlSelect1">Please select a Project Bid</label>
+                                        <select class="form-control form-control-solid" id="bidchoose" id="projectchoose" id="exampleFormControlSelect1">
+                                        {% for i in edit %}
+                                        <option name="choice1" value="bid{{forloop.counter0}}">{{i.3}}</option>
+                                        {% endfor %}
+                                        </select>
+                                        {% for i in edit %}
+                                        <div style="display:none;" id="bid{{forloop.counter0}}" class="conditionbid">                                             <h5>Biding details</h5>
+                                            <p>descirption: {{i.0}}</p>
+                                            <p>Bidder Amount: Rs.{{i.1}}</p>
+                                            <p>Bidder Finishing Time: {{i.2}}</p>
+                                            <form action="editbid/" method="POST">
+                                            {% csrf_token %}
+                                                <input value="{{second_user.username}}" name="user" type="hidden">
+                                                <input name="budget" type="number">
+                                                <input name="date" type="date">
+                                                <input name="project" value="{{i.3}}" type="hidden" name="project">
+                                                <button class="btn bg-blue btn-rounded" style="color:white;" type="submit" onclick="order()">Confirm</button>
+                                            </form> 
+                                        </div>
+                                        {% endfor %}
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                                        <script>
+                                        $('#bidchoose').change(function () {
+                                            var value = this.value;
+                                            var loop = {{projects|length|safe}};
+                                            $('.conditionbid').hide()
+                                            $('#'+value).show()
+
+                                        });
+                                        </script>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if deliver != "no" %}
+                        <button class="btn btn-green-soft" type="button" data-toggle="modal" data-target="#staticBackdrop1">Deliver Files</button>
+                        <div class="modal fade" id="staticBackdrop1" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel2" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel2">Deliver files</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="deliver/" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                            <input value="{{second_user.username}}" name="creator" type="hidden">
+                                            <input type="file" name="file" required>
+                                            <button class="btn bg-blue btn-rounded" style="color:white;" type="submit">Confirm</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-body" id="chat_body">
+                        <ul id="chat-log">
+                        </ul>
+                    </div>
+                    <div class="wrap">
+                        <input type="text" required="" id="chat-message-input" style="background-color: rgba(0, 0, 0, 0.04); float: left; border: none; width: calc(100% - 50px); padding: 3.35%; font-size: 0.8em; color: #32465a;">
+                        <button id = "chat-message-submit"  class="submit" style="float: right; border: none; width: 50px; padding: 3%; cursor: pointer; background: #32465a; color: #f5f5f5;"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top:1%;">
+            <div class="col-xl-4">
+                    <div class="card">
+                        <div class="card-header">Files shared</div>
+                        <div class="card-body text-center">
+                            <a href="/chat/files/{{ second_user.username }}" target="_blank">click here for opening shared box.</a>
+                        </div>
+                    </div>
+            </div>
+            {% if orderfiles != "no" %}
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">Delivered Files</div>
+                    <div class="card-body text-center">
+                        {% for file in orderfiles %}
+                        <div>
+                            <a href="{{file.file.url}}">{{ file.name }}</a>
+                        </div>    
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+    
+    {%endif%}
+        </div>
+    </div>
+    
+{% endblock %}
+{% block ChatScript %}
+
+<script>
+    $( document ).ready(function() {
+     var element = document.getElementById("chat_body");
+    console.log(element.scrollHeight)
+        element.scrollTop = element.scrollHeight;
+    });
+
+    chatlog = document.getElementById('chat-log')
+        var messages = {{messages|safe}}
+        for (let i of messages){
+             var item = document.createElement("li");
+             var content = document.createElement("p");
+             content.innerHTML = i[1];
+             content.id = "chatpara";
+             if (i[0] !== "{{second_user.username|safe}}" ){
+             item.id = "reply";
+             }
+             else{
+                 item.id = "recieved";
+             }
+            item.appendChild(content);
+            chatlog.appendChild(item);
+        }
+        const roomName = "{{room_name|safe}}";
+
+        const chatSocket = new WebSocket(
+            'wss://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            var item = document.createElement("li");
+            var content = document.createElement("p");
+            if (data.call){
+                 content.innerHTML = data.call;
+                      }
+            else{
+
+            content.innerHTML = data.message;
+            }
+            content.id = "chatpara";
+            console.log(data.author);
+            if (data.author !== "{{second_user.username|safe}}" ){
+            item.id = "reply";
+            }
+            else{
+                item.id = "recieved";
+            }
+            item.appendChild(content);
+            chatlog.appendChild(item);
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.getElementById('chat-message-input').focus();
+        document.getElementById('chat-message-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.getElementById('chat-message-submit').click();
+            }
+        };
+        if(document.getElementById('chat-message-input')){
+            console.log("yes")
+        }
+        document.getElementById('chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.getElementById('chat-message-input');
+            const message = messageInputDom.value;
+            if (message !== ""){
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            messageInputDom.value = '';
+            }
+        };
+    function order(){
+        chatSocket.send(JSON.stringify({
+                'message': 'You just got hired for the project.'
+            }));
+    }
+</script>
+{% endblock ChatScript %}

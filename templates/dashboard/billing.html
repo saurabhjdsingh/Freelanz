@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+<title>Thinkgroupy | billing</title>
+{% endblock head %}
+{% block body_block %}
+<div id="layoutSidenav_content">
+<main>
+    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <div class="container-fluid">
+            <div class="page-header-content">
+                <div class="row align-items-center justify-content-between pt-3">
+                    <div class="col-auto mb-3">
+                        <h1 class="page-header-title">
+                            <div class="page-header-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
+                            Account Settings - Billing
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% if messages %}
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        {% for message in messages %}
+        <h5 class="alert-heading">{{ message }}</h5>
+        {% endfor %}
+        <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span></button>
+        </div>
+    {% endif %}
+    <div class="container mt-4">
+        <nav class="nav nav-borders">
+            <a class="nav-link ml-0" href="/profile/{{user.id}}">Profile</a>
+            <a class="nav-link active" href="/billing">Billing</a>
+            <a class="nav-link" href="/security">Security</a>
+        </nav>
+        <hr class="mt-0 mb-4">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-left-lg border-left-primary">
+                    <div class="card-body">
+                        <div class="small text-muted">Current wallet balance</div>
+                        <div class="h3">Rs. {{wallet}}</div>
+                        {% if withdraw == "yes" and verified == "yes" %}
+                        <button onclick="mask()" class="text-arrow-icon small btn btn-primary" type="button" data-toggle="modal" data-target="#staticBackdrop">Withdraw your balance<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Money will be transfered to this account</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label class="text-gray-600 small">Bank Name</label>
+                                    <input disabled value="{{account.bank_name}}" type="text" class="form-control form-control-solid py-4">
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-gray-600 small">Account Name</label>
+                                    <input disabled  value="{{account.name}}" type="text" class="form-control form-control-solid py-4">
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-gray-600 small">Account Number</label>
+                                    <input disabled  id="accountnumshown" value="{{account.account_number}}" type="text" class="form-control form-control-solid py-4">
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-gray-600 small">Bank IFSC Code</label>
+                                    <input disabled  value="{{account.ifsc_code}}" type="text" class="form-control form-control-solid py-4">
+                                </div>
+                                <form method="POST" action="/payments/processpayment/">
+                                {% csrf_token %}
+                                <input type="hidden" name="amount" value="{{budget}}">
+                                <button class="text-arrow-icon small btn btn-primary" type="submit">Confirm<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </button>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    {%endif%}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-left-lg border-left-secondary">
+                    <div class="card-body">
+                        <div class="small text-muted">Active order payment</div>
+                        {% if temp != 0 %}
+                        <div class="h3">Rs. {{temp.budget}}</div>
+                        {% else %}
+                        <div class="h3">Rs. {{temp}}</div>
+                        {% endif %}
+                        <a class="text-arrow-icon small text-secondary" href="{% url 'projects:orders' %}">View order<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% if refund %}
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-left-lg border-left-success">
+                    <div class="card-body">
+                        <div class="small text-muted">Refund amount</div>
+                        <div class="h3 d-flex align-items-center">Rs. {{refund.budget}}</div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-left-lg border-left-success">
+                    <div class="card-body">
+                        <div class="small text-muted">Refund amount</div>
+                        <div class="h3 d-flex align-items-center">Rs. 0</div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="card card-header-actions mb-4">
+            <div class="card-header">
+                Payment Methods
+                {% if account == "no" %}
+                <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#staticBackdrop">Add Payment Method</button>
+                <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Fill Account Details</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                            <form action="" method="POST" id="bank_form">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label class="text-gray-600 small">Bank Name</label>
+                                    <input name="bank_name" type="text" class="form-control form-control-solid py-4" name="name" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-gray-600 small">Account Name</label>
+                                    <input name="user_name" type="text" class="form-control form-control-solid py-4" name="name" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-gray-600 small">Account Number</label>
+                                    <input name ="accnumber" id="accnum" type="password" class="form-control form-control-solid py-4" name="accountnumber1" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-gray-600 small">Verify Account Number</label>
+                                    <input id="verifyaccnum" type="password" class="form-control form-control-solid py-4" name="accountnumber2" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <label class="text-gray-600 small">Bank IFSC Code</label>
+                                    <input name="ifsc" id="ifsc" type="text" class="form-control form-control-solid py-4" name="ifsc" required="required">
+                                </div>
+                                <p id="error" style="display:none;">
+
+                                </p><p id="2error" style="display:none;">
+
+                                </p>
+                                <button class="btn bg-blue btn-rounded" style="color:white;" type="submit" >Confirm</button>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        {% if account != "no" %}
+                        <i class="fas fa-landmark"></i>
+                        <div class="ml-4">
+                            <div class="small" id="accountnum">{{account.account_number}}</div>
+                            <div class="text-xs text-muted">{{account.bank_name}} | {{account.name}}</div>
+                        </div>
+                    </div>
+                {%endif%}
+                    <div class="ml-4 small">
+                        <div class="badge badge-light mr-3">Default</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function mask(){
+        var accnum2 = document.getElementById('accountnumshown').value;
+        document.getElementById('accountnumshown').value = '********'+accnum2.slice(-4);
+    }
+    $(document).ready(function() {
+        var accnum = document.getElementById('accountnum').innerHTML;
+        document.getElementById('accountnum').innerHTML = '********'+accnum.slice(-4);
+            $('#bank_form').on('submit', function(event){
+            
+            if(document.getElementById('accnum').value !== document.getElementById('verifyaccnum').value){
+                document.getElementById('error').innerHTML = "Account Numbers dont match";
+                document.getElementById('error').style.display = "block";
+                event.preventDefault();
+            }   
+            
+        });
+    });
+    $(document).ready(function() {
+            $('#bank_form').on('submit', function(event){
+              var inputvalues = document.getElementById('ifsc').value     
+              console.log(inputvalues)
+              var reg = /[A-Z|a-z]{4}[0][a-zA-Z0-9]{6}$/;
+              console.log(inputvalues.match(reg))
+              if(inputvalues.match(reg)){
+                  
+              }
+              else{
+                document.getElementById('2error').innerHTML = "IFSC code not correct";
+                document.getElementById('2error').style.display = "block";
+                event.preventDefault();
+              }
+        });
+    });
+    </script>
+{% endblock %}

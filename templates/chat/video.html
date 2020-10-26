@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>Thinkgroupy</title>
+{% endblock head %}
+{% block body_block %}
+
+<div id="layoutSidenav_content">
+    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <div class="container-fluid">
+            <div class="page-header-content">
+                <div class="row align-items-center justify-content-between pt-3">
+                    <div class="col-auto mb-3">
+                        <h1 class="page-header-title">
+                            <div class="page-header-icon"><i data-feather="user"></i></div>
+                            Video Call
+                            <p id="typing-info"></p>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-4">
+                    <div class="card">
+                        <div class="card-header">You</div>
+                        <div class="card-body text-center">
+                            <video id="localVideo" class="col-md-12" autoplay muted></video>
+                            <button onclick="mute()" class="btn bg-red btn-md btn-rounded" style="color:black">
+                                <div class="nav-link-icon"><i data-feather="volume-x"></i></div>
+                            </button>
+                            <button onclick="exit()" class="btn bg-red btn-md btn-rounded" style="color:black">
+                                <div class="nav-link-icon"><i data-feather="video-off"></i></div>
+                            </button>
+                        </div>
+                    </div>
+                
+            </div>
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-header">{{user1}}</div>
+                    <video id="remoteVideo" class="col-md-12" autoplay></video>
+                    <button href="#" onclick="close_window();return false;" class="btn bg-red btn-lg btn-rounded" style="color:black">
+                        <div class="nav-link-icon"><i data-feather="phone-off"></i></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+function close_window() {
+  if (confirm("Close Window?")) {
+    close();
+  }
+}
+if (!location.hash) {
+  location.hash = "{{room|safe}}";
+}
+const roomHash = location.hash.substring(1);
+
+const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
+let localStream;
+const videochatroomname = 'observable-' + roomHash;
+const configuration = {
+  iceServers: [{
+    urls: 'stun:stun.l.google.com:19302'
+  }]
+};
+let room;
+let pc;
+
+
+function onSuccess() {};
+function onError(error) {
+  console.error(error);
+};
+
+drone.on('open', error => {
+  if (error) {
+    return console.error(error);
+  }
+  room = drone.subscribe(videochatroomname);
+  room.on('open', error => {
+    if (error) {
+      onError(error);
+    }
+  });
+ 
+  room.on('members', members => {
+    console.log('MEMBERS', members);
+ 
+    const isOfferer = members.length === 2;
+    startWebRTC(isOfferer);
+  });
+});
+
+
+function sendMessage(message) {
+  drone.publish({
+    room: videochatroomname,
+    message
+  });
+}
+
+function startWebRTC(isOfferer) {
+  pc = new RTCPeerConnection(configuration);
+
+ 
+  pc.onicecandidate = event => {
+    if (event.candidate) {
+      sendMessage({'candidate': event.candidate});
+    }
+  };
+
+  
+  if (isOfferer) {
+    pc.onnegotiationneeded = () => {
+      console.log("left")
+      pc.createOffer().then(localDescCreated).catch(onError);
+    }
+  }
+
+ 
+  pc.ontrack = event => {
+    const stream = event.streams[0];
+    if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
+      remoteVideo.srcObject = stream;
+    }
+    
+  };
+
+  navigator.mediaDevices.getUserMedia({
+    audio: true,
+    video: true,
+  }).then(stream => {
+    localStream = stream
+    localVideo.srcObject = stream;
+    
+    stream.getTracks().forEach(track => pc.addTrack(track, stream));
+  }, onError);
+
+  room.on('data', (message, client) => {
+ 
+    if (client.id === drone.clientId) {
+      return;
+    }
+
+    if (message.sdp) {
+     
+      pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
+
+        if (pc.remoteDescription.type === 'offer') {
+          pc.createAnswer().then(localDescCreated).catch(onError);
+        }
+      }, onError);
+    } else if (message.candidate) {
+     
+      pc.addIceCandidate(
+        new RTCIceCandidate(message.candidate), onSuccess, onError
+      );
+    }
+  });
+}
+
+function localDescCreated(desc) {
+  pc.setLocalDescription(
+    desc,
+    () => sendMessage({'sdp': pc.localDescription}),
+    onError
+  );
+   
+      
+}
+  function mute(){
+    if(localStream.getAudioTracks()[0].enabled == true){
+        localStream.getAudioTracks()[0].enabled = false;
+        
+    }
+    else{
+        localStream.getAudioTracks()[0].enabled= true;
+    };
+   console.log(localStream.getAudioTracks()[0].enabled)
+};
+function exit(){
+    if(localStream.getVideoTracks()[0].enabled == true){
+        localStream.getVideoTracks()[0].enabled = false;
+        
+    }
+    else{
+        localStream.getVideoTracks()[0].enabled= true;
+    };
+   console.log(localStream.getVideoTracks()[0].enabled)
+}
+</script>
+{% endblock %}

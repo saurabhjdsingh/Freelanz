@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Contact Us{% endblock title %}
+ 
+{% block body_block %}
+<div class="container-contact" style="
+    margin-top: 89px; background-image: url({% static 'pics/contact-us-bg.png' %}) !important;">
+<div class="container">
+  
+  <div class="row">
+    <div class="col"><p class="title-contact-us text-center">Contact Us</p></div>
+   </div> 
+  <div class="row">
+{% if submitted %}
+    <div class="alert alert-success" role="alert">
+    Your message was submitted successfully. Thank you.
+    </div>
+{% else %}
+    {% if form.errors %}
+        {% for error in form.errors %} 
+         <div class="alert alert-danger" role="alert">
+          This fields is required : {{ error }}
+        </div>
+        {% endfor %}
+    {% endif %} 
+    <div class="col-sm-12 col-md-6" style="padding-left: 25px; padding-right: 25px;">
+      <form method="POST">
+      {% csrf_token %}
+  <div class="form-row">
+    <div class="col-sm-12 col-md-6" style="padding-bottom: 20px;">
+      <input type="text" class="form-control" name="name" placeholder="Name"/>
+    </div>
+    <div class="col-sm-12 col-md-6" style="padding-bottom: 20px;">
+      <input type="email" class="form-control" name="email" placeholder="Email Address"/>
+    </div>
+  </div>
+    <div class="form-row">
+    <div class="col-sm-12 col-md-12" style="padding-bottom: 20px;">
+      <input type="text" class="form-control" name="subject" placeholder="subject"/>
+    </div>
+    </div>
+  <div class="textarea-contact-form">
+    <textarea class="form-control" name="message" placeholder="Message" rows="6"></textarea>
+    </div>
+    <button type="submit" class="submit-btn btn btn-light pullright">SUBMIT</button>
+</form>
+  </div>
+{% endif %}
+    <div class="col-sm-12  col-md-6" style="padding-left: 25px; padding-right: 25px; padding-bottom:60px;">
+    <p class="blurb-icon"><span class="contact-icons"><i class="fa fa-envelope" ></i></span> 
+    <strong><a href="mailto:contact@thinkgroupy.com" style="color: #ffffff; font-size: 19px;letter-spacing: 1px;">contact@thinkgroupy.com</a></strong>
+    </p>
+    <p class="blurb-icon"><span class="contact-icons2"><i class="fa fa-phone" ></i></span> 
+    <strong style="color: #ffffff; font-size: 19px;letter-spacing: 1px;"><a href="telto:+91-9456052343" style="color: #ffffff;">+91-9456052343</a></strong>
+    </p>
+    <p class="blurb-icon"><span class="contact-icons3"><i class="fa fa-map-marker" ></i></span> 
+    <span style="color: #ffffff; font-size: 18px; font-weight: 600;">Dwarka sector 3,NEW-DELHI(INDIA)</span>
+    </p>
+    </div> 
+  </div>
+</div>
+</div>
+{% endblock %}

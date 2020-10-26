@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block head %}
+        <title>Thinkgroupy-Categories</title>
+{% endblock head %}
+
+{% block body_block %}
+<div id="layoutSidenav_content">
+    <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <div class="container-fluid">
+            <div class="page-header-content">
+                <div class="row align-items-center justify-content-between pt-3">
+                    <div class="col-auto mb-3">
+                        <h1 class="page-header-title">
+                            <div class="page-header-icon"><i data-feather="user"></i></div>
+                            Categories
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="sbp-preview-content">
+            <div class="row">
+                {% for category in categories %}
+                <div class="col-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img style="width: 150px; height: auto;" class="rounded-circle mt-4" src="{{category.image.url}}">
+                                    <h4 class="card-widget__title text-dark mt-3">{{category.name}}</h4>
+                                    <a href="/projects/{{category.name}}">View Projects</a>        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    </div>
+</div>
+{% endblock %}

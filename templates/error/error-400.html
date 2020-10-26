@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+{% extends 'error/error_base.html' %}
+{% load static %}
+{% block head %}
+        <title>404error - thinkgroupy</title>
+{% endblock head %}
+{% block body_block %}
+<img class="img-fluid p-4" src="{% static 'assets/img/freepik/400-error-bad-request-pana.svg' %}" alt="" />
+<p class="lead">You have issued a malformed or illegal request.</p>
+{% endblock %}
