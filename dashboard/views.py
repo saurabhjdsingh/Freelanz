@@ -308,7 +308,7 @@ def PhoneUpdate(request):
             client.messages.create(
                               body=body_message,
                               from_='+13343360839',
-                              to='+91'+str(phone)
+                              to=str(phone)
                           )
             obj = UserPhone.objects.filter(user=request.user)
             if obj:
