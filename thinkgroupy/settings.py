@@ -86,8 +86,12 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'thinkgroupy_db',
+        'USER': 'saurabh',
+        'PASSWORD': 'S@urabh1234',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
