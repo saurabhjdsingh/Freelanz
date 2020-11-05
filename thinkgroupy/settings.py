@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
-STATIC_DIR = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 SECRET_KEY = 'z%l8y0#p^h7q9u#cm9-_jrl50)0^05a-p311r*51hsd7w$mj^*'
 
@@ -86,12 +86,8 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'thinkgroupy_db',
-        'USER': 'saurabh',
-        'PASSWORD': 'S@urabh1234',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -162,8 +158,8 @@ LOGIN_REDIRECT_URL = 'dashboard:dashboard'
 LOGIN_URL = reverse_lazy('accounts:signin')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_USER = 'contact@thinkgroupy.com'
-EMAIL_HOST_PASSWORD = 'ygglzbvzdfhohbqx'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
