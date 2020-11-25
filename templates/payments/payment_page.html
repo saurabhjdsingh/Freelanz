@@ -44,8 +44,12 @@
                                     <p>Refund: - Rs. {{refund.budget}}</p>                                   
                                     <p>Total Payment : Rs. {{amount|add:100}}</p>
                                     <form action="/payments/confirmpayment/" method="POST">
+<<<<<<< HEAD
 					{% csrf_token %}
 <br>
+=======
+                                    {% csrf_token %}
+>>>>>>> 4f06e9065cb8328bcd655303ee5026f72154fc25
                                         <input name="projectname" value="{{project.name}}" type="hidden">
                                         <input name="price" value="{{ amount|add:100 }}" type="hidden">
                                         <input name="payedto" value="{{bid.created_by}}" type="hidden">
