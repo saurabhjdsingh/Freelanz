@@ -15,6 +15,8 @@ urlpatterns = [
     path('', include("accounts.urls", namespace="accounts")),
     path('', include("dashboard.urls", namespace="dashboard")),
     path('contact', contact.contact, name='contact'),
+    path('terms', views.terms, name='terms'),
+    path('privacy', views.privacy, name='privacy'),
     path('posts/', include("posts.urls", namespace="posts")),
     path('projects/', include("projects.urls", namespace="projects")),
     path('accounts/', include('allauth.urls')),
