@@ -48,7 +48,7 @@
                                         <input name="projectname" value="{{project.name}}" type="hidden">
                                         <input name="price" value="{{ amount|add:100 }}" type="hidden">
                                         <input name="payedto" value="{{bid.created_by}}" type="hidden">
-                                        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_HZxFaqOlnavM73" data-amount="{% widthratio amount|add:100 1 100 %}" data-currency="INR" data-buttontext="Pay Securely" data-name="Thinkgroupy" data-description="Order & start project" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRpWzPOB8s9WRX7JXZ96x1oPESu-eoN5YUFfDKcebTKFn7piPBS&usqp=CAU">
+                                        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_live_Zf4TbkIUdXTAUP" data-amount="{% widthratio amount|add:100 1 100 %}" data-currency="INR" data-buttontext="Pay Securely" data-name="Thinkgroupy" data-description="Order & start project" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRpWzPOB8s9WRX7JXZ96x1oPESu-eoN5YUFfDKcebTKFn7piPBS&usqp=CAU">
                                         </script>
                                         <input type="hidden" custom="Hidden Element" name="hidden">
                                     </form>
