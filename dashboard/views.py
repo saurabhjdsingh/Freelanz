@@ -302,7 +302,7 @@ def PhoneUpdate(request):
             phone = form.cleaned_data['phone']
             token = secrets.randbits(16)
             account_sid = 'AC929d62e1173b1d610a76aa7aa14f9acc'
-            auth_token = 'feb671c6cf8aa81f6f496c8e05b39801'
+            auth_token = '840c3797d4ccac0a7c6ec57f6dd2034c'
             client = Client(account_sid, auth_token)
             body_message = 'Your O.T.P for phone Verification is: ' + str(token)
             client.messages.create(
