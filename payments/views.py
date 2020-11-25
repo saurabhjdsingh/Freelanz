@@ -70,7 +70,7 @@ def processwithdrawal(request):
             'content-type': 'application/json',
         }
         data = {"account": account_id, "amount": amount, "currency": "INR"}
-        response = requests.post('https://api.razorpay.com/v1/transfers', headers=headers, json=data, auth=('rzp_test_HZxFaqOlnavM73', 'VzFO4xqTUVAGW3eAuWB524sj'))
+        response = requests.post('https://api.razorpay.com/v1/transfers', headers=headers, json=data, auth=('rzp_live_Zf4TbkIUdXTAUP', '1jyy1EBkzTqXlfQJLXLDOHtZ'))
         VirtualCurrency.objects.filter(user=request.user).update(budget=0)
         messages.success(request, 'We have transferred the money to your account.')
     return render(request, "dashboard/billing.html")
