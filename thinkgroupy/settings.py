@@ -79,18 +79,21 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("0.0.0.0", 6379)],
+            "hosts": [("127.0.0.1", 6379)],
         },
     },
 }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'thinkgroupy_db',
+        'USER': 'thinkgroupy_user',
+        'PASSWORD': 'S@urabh1234',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -140,8 +143,6 @@ SOCIALACCOUNT_PROVIDERS = {
     'github': {
         'SCOPE': [
             'user',
-            'repo',
-            'read:org',
         ],
     },
     'google': {
@@ -158,7 +159,7 @@ LOGIN_REDIRECT_URL = 'dashboard:dashboard'
 LOGIN_URL = reverse_lazy('accounts:signin')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_USER = ''
+EMAIL_HOST_USER = 'contact@thinkgroupy.com'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
