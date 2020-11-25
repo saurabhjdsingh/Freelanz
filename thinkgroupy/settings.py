@@ -8,7 +8,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 SECRET_KEY = config("SECRET_KEY")
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+#DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
