@@ -8,7 +8,7 @@ from projects.models import Order, Project, Bid
 from chat.models import Notify
 import requests
 from django.contrib import messages
-client = razorpay.Client(auth=("rzp_test_HZxFaqOlnavM73", "VzFO4xqTUVAGW3eAuWB524sj"))
+client = razorpay.Client(auth=("rzp_live_Zf4TbkIUdXTAUP", "1jyy1EBkzTqXlfQJLXLDOHtZ"))
 
 
 @login_required
