@@ -1,13 +1,14 @@
 import os
+from decouple import config
 from django.urls import reverse_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-SECRET_KEY = 'z%l8y0#p^h7q9u#cm9-_jrl50)0^05a-p311r*51hsd7w$mj^*'
+SECRET_KEY = config("SECRET_KEY")
 
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
@@ -87,9 +88,9 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'thinkgroupy_db',
-        'USER': 'thinkgroupy_user',
-        'PASSWORD': 'S@urabh1234',
+        'NAME': config("DB_NAME"),
+        'USER': config("DB_USER"),
+        'PASSWORD': config("DB_PASS"),
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -159,8 +160,8 @@ LOGIN_REDIRECT_URL = 'dashboard:dashboard'
 LOGIN_URL = reverse_lazy('accounts:signin')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_USER = 'contact@thinkgroupy.com'
-EMAIL_HOST_PASSWORD = 'rzkkwfcllajtcvpv'
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
