@@ -15,7 +15,7 @@
         Post Detail
         <div>
             <button class="btn btn-pink btn-icon mr-2">
-                <i data-feather="heart"><a href="/posts/like/{{form.id}}"></a></i>
+                <i data-feather="heart"><a href="/posts/like/{{object.pk}}"></a></i>
             </button>
             <button class="btn btn-red btn-icon mr-2">
                 <a style="color:black;" href="{% url 'posts:deleteposts' pk=object.pk %}">
