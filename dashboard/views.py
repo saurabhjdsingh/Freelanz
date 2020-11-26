@@ -304,7 +304,7 @@ def PhoneUpdate(request):
             account_sid = 'AC929d62e1173b1d610a76aa7aa14f9acc'
             auth_token = '840c3797d4ccac0a7c6ec57f6dd2034c'
             client = Client(account_sid, auth_token)
-            body_message = 'Your O.T.P for phone Verification is: ' + str(token)
+            body_message = 'Hey! Thanks for making an account on thinkgroupy.com , Your O.T.P for phone Verification is: ' + str(token)
             client.messages.create(
                               body=body_message,
                               from_='+18444458559',
