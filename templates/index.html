@@ -309,8 +309,12 @@
             </p>
           </div>
           <div class="col-md-6">
-            <a class="link-one hover-effect" href="signup">CREATE ACCOUNT</a>
-            <a class="link-two hover-effect" href="contact">CONTACT US</a>
+            {% if user.is_authenticated %}
+                  <a class="link-two hover-effect" href="/contact">CONTACT US</a>
+            {% else %}
+                  <a class="link-one hover-effect" href="/signup">CREATE ACCOUNT</a>
+                  <a class="link-two hover-effect" href="/contact">CONTACT US</a>
+            {% endif %}
           </div>
         </div>
       </div>
