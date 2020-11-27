@@ -22,11 +22,14 @@
                         <a class="btn btn-icon btn-google mx-1"  href="{% url 'google_login' %}"><i class="fab fa-google fa-fw fa-sm"></i></a>
                     </div>
                     <hr class="my-0" />
-                    {% if errors %}
+                    {% if messages %}
                         <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        {% for error in errors %}
-                            <h5 class="alert-heading">{{ error }}</h5>
-                        {% endfor %}
+                        <h5 class="alert-header">Error! one of these could be the reason.</h5>
+                        <li class="alert-body">☻ Your password must conatins atleast 8 characters.</li>
+                        <li class="alert-body">☻ Make sure your password matches with confirm password.</li>
+                        <li class="alert-body">☻ Your password must be a <strong>strong password (ex: Think@groupy#19).</strong></li>
+                        <li class="alert-body">☻ Username already exist.</li>
+                        <li class="alert-body">☻ Email already exist.</li>
                         <button class="close" type="button" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
                         </div>
