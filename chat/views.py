@@ -11,7 +11,7 @@ from asgiref.sync import async_to_sync
 from projects.models import Project, Bid, Order, CompletedOrder
 from payments.models import VirtualCurrency, Tempwallet, Refund
 import razorpay
-client = razorpay.Client(auth=("rzp_test_HZxFaqOlnavM73", "VzFO4xqTUVAGW3eAuWB524sj"))
+client = razorpay.Client(auth=("rzp_live_Zf4TbkIUdXTAUP", "1jyy1EBkzTqXlfQJLXLDOHtZ"))
 
 
 @login_required
