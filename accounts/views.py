@@ -26,7 +26,6 @@ def account_activated(request):
 def account_activated_false(request):
     return render(request, 'accounts/account_activated_false.html')
 
-
 def signup(request):
     if request.user.is_authenticated:
         return redirect('dashboard:dashboard')
@@ -51,7 +50,10 @@ def signup(request):
                     mail_subject, message, to=[to_email]
                 )
                 email.send()
-            return redirect('accounts:confirm_your_account')
+                return redirect('accounts:confirm_your_account')
+            else:
+                form = SignUpForm()
+                return render(request, 'accounts/signup.html', {'form': form})
         else:
             form = SignUpForm()
             return render(request, 'accounts/signup.html', {'form': form})

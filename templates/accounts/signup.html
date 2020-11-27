@@ -22,10 +22,10 @@
                         <a class="btn btn-icon btn-google mx-1"  href="{% url 'google_login' %}"><i class="fab fa-google fa-fw fa-sm"></i></a>
                     </div>
                     <hr class="my-0" />
-                    {% if messages %}
+                    {% if errors %}
                         <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        {% for message in messages %}
-                            <h5 class="alert-heading">{{ message }}</h5>
+                        {% for error in errors %}
+                            <h5 class="alert-heading">{{ error }}</h5>
                         {% endfor %}
                         <button class="close" type="button" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">×</span></button>
