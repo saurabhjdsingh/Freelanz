@@ -53,7 +53,8 @@ def signup(request):
                 return redirect('accounts:confirm_your_account')
             else:
                 form = SignUpForm()
-                return render(request, 'accounts/signup.html', {'form': form})
+                messages = " "
+                return render(request, 'accounts/signup.html', {'form': form, 'messages': messages})
         else:
             form = SignUpForm()
             return render(request, 'accounts/signup.html', {'form': form})
