@@ -121,7 +121,7 @@
                 var roomName = "{{mess.2|safe}}";
                 const chatSocket{{mess.2|safe}} = new WebSocket(
                     'wss://'
-                    + window.location.host
+                    + window.location.host + ':8001'
                     + '/ws/chat/'
                     + roomName
                     + '/'
@@ -169,7 +169,7 @@
                 var roomName = "{{mess.2|safe}}";
                 const chatSocket{{mess.2|safe}} = new WebSocket(
                     'wss://'
-                    + window.location.host
+                    + window.location.host + ':8001'
                     + '/ws/chat/'
                     + roomName
                     + '/'
