@@ -1,6 +1,13 @@
 # byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+accounts/migrations
+chat/migrations
+dashboard/migrations
+payments/migrations
+posts/migrations
+projects/migrations
+thinkgroupy/migrations
 
 # keys
 settings.ini
@@ -17,8 +24,10 @@ settings.ini
 # venv
 env
 venv
+media
 
 # other
+templates/.DS_Store
 .DS_Store
 
 # javascript
