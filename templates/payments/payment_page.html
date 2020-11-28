@@ -19,11 +19,11 @@
                             <h5>Project Details</h5>
                             <p>Name : {{project.name}}</p>
                             <p>Description : {{ project.description }}</p>
-                            <p>Project Budget: $. {{project.budget}}</p>
+                            <p>Project Budget: Rs {{project.budget}}</p>
                             <h5>Bid Details</h5>
                             <p>User : {{bid.created_by}}</p>
                             <p>Bid Description : {{ bid.description }}</p>
-                            <p>Bid final cost : $. {{bid.budget}}</p>
+                            <p>Bid final cost : Rs {{bid.budget}}</p>
                         </div>
                     </div>
                 </div>
@@ -39,16 +39,16 @@
                                 </div>
                                 <div class="modal-body">
                                     <h5>Payment Details</h5>
-                                    <p>Bid Amount: + $. {{bid.budget}}</p>
-                                    <p>Service Fee: + $. 1.2</p>
-                                    <p>Refund: - $. {{refund.budget}}</p>                                   
-                                    <p>Total Payment : $. {{amount|add:1.2}}</p>
+                                    <p>Bid Amount: + Rs. {{bid.budget}}</p>
+                                    <p>Service Fee: + Rs. 100</p>
+                                    <p>Refund: - Rs. {{refund.budget}}</p>                                   
+                                    <p>Total Payment : Rs. {{amount|add:100}}</p>
                                     <form action="/payments/confirmpayment/" method="POST">
 					{% csrf_token %}
                                         <input name="projectname" value="{{project.name}}" type="hidden">
-                                        <input name="price" value="{{ amount|add:1.2 }}" type="hidden">
+                                        <input name="price" value="{{ amount|add:100 }}" type="hidden">
                                         <input name="payedto" value="{{bid.created_by}}" type="hidden">
-                                        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_live_Zf4TbkIUdXTAUP" data-amount="{% widthratio amount|add:1.2 1 100 %}" data-currency="USD" data-buttontext="Pay Securely" data-name="Thinkgroupy" data-description="Pay & Hire.">
+                                        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_live_Zf4TbkIUdXTAUP" data-amount="{% widthratio amount|add:100 1 100 %}" data-currency="USD" data-buttontext="Pay Securely" data-name="Thinkgroupy" data-description="Pay & Hire.">
                                         </script>
                                         <input type="hidden" custom="Hidden Element" name="hidden">
                                     </form>
