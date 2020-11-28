@@ -48,7 +48,6 @@ def hire(request):
             refund = 0
             amount = budget
         else:
-            print(refund)
             refund = Refund.objects.get(user=request.user)
             
             if refund.budget == 0:
@@ -60,7 +59,6 @@ def hire(request):
                 amount = budget- refund.budget
                 refund.budget = 0
                 refund.save()
-        print(refund)
         response = client.order.create(dict(amount=int(amount), currency="INR"))
         order_id = response['id']
         order_status = response['status']
