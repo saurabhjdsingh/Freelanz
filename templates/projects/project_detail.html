@@ -29,7 +29,7 @@
 <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Budget-$.{{project.budget}}<p style="float:right">category: <a href="/projects/{{project.category.name}}">{{project.category.name}}</a></p></h5>
+                <h5 class="card-title">Budget-Rs {{project.budget}}<p style="float:right">category: <a href="/projects/{{project.category.name}}">{{project.category.name}}</a></p></h5>
                 <p class="card-title">{{ project.description}}</p>
                 {% if project.file %}
                 <a href="{{project.file.url}}" download>Attachment</a>
