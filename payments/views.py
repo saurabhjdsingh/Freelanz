@@ -19,7 +19,7 @@ def payment_status(request):
         payedto = User.objects.get(username=request.POST.get('payedto'))
         payment_id = request.POST.get('razorpay_payment_id')
         payment_amount = price*100
-        client.payment.capture(payment_id, payment_amount, {"currency": "INR"})
+        client.payment.capture(payment_id, payment_amount, {"currency": "USD"})
         Creator = Project.objects.get(created_by=request.user, name=request.POST.get('projectname'))
         bid = Bid.objects.get(project=Creator, created_by=payedto)
         obj = Order(bid=bid, creator=request.user, worker=payedto, paid=int(bid.budget))
