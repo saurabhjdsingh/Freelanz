@@ -107,7 +107,7 @@
                                         <p>Project description: {{i.1}}</p>
                                         <h5>Bid details</h5>
                                         <p>Bidder descirption: {{i.2}}</p>
-                                        <p>Bidder Amount: $.{{i.3}}</p>
+                                        <p>Bidder Amount: Rs {{i.3}}</p>
                                         <p>Bidder Finishing Time: {{i.4}}</p> 
                                         <form action="/payments/{{i.5}}/{{i.6}}" method="POST">
                                             {% csrf_token %}
@@ -135,7 +135,7 @@
                                         <p>Project description: {{i.1}}</p>
                                         <h5>Bid details</h5>
                                         <p>Bidder descirption: {{i.2}}</p>
-                                        <p>Bidder Amount: $.{{i.3}}</p>
+                                        <p>Bidder Amount: Rs {{i.3}}</p>
                                         <p>Bidder Finishing Time: {{i.4}}</p>
                                    
                                     <form action="/payments/{{i.5}}/{{i.6}}" method="POST">
@@ -178,7 +178,7 @@
                                     <div class="modal-body">
                                         <h5>Biding details</h5>
                                         <p>descirption: {{i.0}}</p>
-                                        <p>Bidder Amount: $.{{i.1}}</p>
+                                        <p>Bidder Amount: Rs {{i.1}}</p>
                                         <p>Bidder Finishing Time: {{i.2}}</p>
                                         <form action="editbid/" method="POST">
                                         {% csrf_token %}
@@ -201,7 +201,7 @@
                                         {% for i in edit %}
                                         <div style="display:none;" id="bid{{forloop.counter0}}" class="conditionbid">                                             <h5>Biding details</h5>
                                             <p>descirption: {{i.0}}</p>
-                                            <p>Bidder Amount: $.{{i.1}}</p>
+                                            <p>Bidder Amount: Rs {{i.1}}</p>
                                             <p>Bidder Finishing Time: {{i.2}}</p>
                                             <form action="editbid/" method="POST">
                                             {% csrf_token %}
