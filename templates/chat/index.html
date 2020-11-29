@@ -100,16 +100,16 @@
                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                                     </div>
                                     <div class="modal-body">
-                                        <h5>Project Details</h5>
-                                        {%if projects|length == 1 %}
+                                    <h5>Project Details</h5>
+                                    {%if projects|length == 1 %}
                                         {% for i in projects %}
-                                        <p>Project Name: {{i.0}}</p>
-                                        <p>Project description: {{i.1}}</p>
-                                        <h5>Bid details</h5>
-                                        <p>Bidder descirption: {{i.2}}</p>
-                                        <p>Bidder Amount: Rs {{i.3}}</p>
-                                        <p>Bidder Finishing Time: {{i.4}}</p> 
-                                        <form action="/payments/{{i.5}}/{{i.6}}" method="POST">
+                                            <p>Project Name: {{i.0}}</p>
+                                            <p>Project description: {{i.1}}</p>
+                                            <h5>Bid details</h5>
+                                            <p>Bidder descirption: {{i.2}}</p>
+                                            <p>Bidder Amount: $.{{i.3}}</p>
+                                            <p>Bidder Finishing Time: {{i.4}}</p> 
+                                            <form action="/payments/{{i.5}}/{{i.6}}" method="POST">
                                             {% csrf_token %}
                                             <input value="{{second_user.username}}" name="bidder" type="hidden">
                                             <input value="{{room_name}}" name="room" type="hidden">
@@ -117,10 +117,10 @@
                                             <input value="{{second_user.username}}" name="userpayed" type="hidden">
                                             <input name="budget" type="hidden" value="{{i.3}}">
                                             <button class="btn bg-blue btn-rounded" style="color:white;" type="submit">Confirm</button>
-                                        </form>
+                                            </form>
                                         {% endfor %}
-                                        {% else %}
                                     </div>
+                                    {% else %}
                                     <div class="form-group">
                                     <label for="exampleFormControlSelect1">Please select a Project</label>
                                     <select class="form-control form-control-solid" id="projectchoose" id="exampleFormControlSelect1">
@@ -135,7 +135,7 @@
                                         <p>Project description: {{i.1}}</p>
                                         <h5>Bid details</h5>
                                         <p>Bidder descirption: {{i.2}}</p>
-                                        <p>Bidder Amount: Rs {{i.3}}</p>
+                                        <p>Bidder Amount: $.{{i.3}}</p>
                                         <p>Bidder Finishing Time: {{i.4}}</p>
                                    
                                     <form action="/payments/{{i.5}}/{{i.6}}" method="POST">
@@ -178,7 +178,7 @@
                                     <div class="modal-body">
                                         <h5>Biding details</h5>
                                         <p>descirption: {{i.0}}</p>
-                                        <p>Bidder Amount: Rs {{i.1}}</p>
+                                        <p>Bidder Amount: $.{{i.1}}</p>
                                         <p>Bidder Finishing Time: {{i.2}}</p>
                                         <form action="editbid/" method="POST">
                                         {% csrf_token %}
@@ -201,7 +201,7 @@
                                         {% for i in edit %}
                                         <div style="display:none;" id="bid{{forloop.counter0}}" class="conditionbid">                                             <h5>Biding details</h5>
                                             <p>descirption: {{i.0}}</p>
-                                            <p>Bidder Amount: Rs {{i.1}}</p>
+                                            <p>Bidder Amount: $.{{i.1}}</p>
                                             <p>Bidder Finishing Time: {{i.2}}</p>
                                             <form action="editbid/" method="POST">
                                             {% csrf_token %}
