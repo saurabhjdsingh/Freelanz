@@ -64,8 +64,9 @@ def confirm_payment(request,  slug, name):
 @login_required
 def processwithdrawal(request):
     if request.method == "POST":
+        price = VirtualCurrency.objects.filter(user=request.user).budget
         account_id = AccountDetails.objects.get(user=request.user).account_id
-        amount = int(request.POST.get('amount'))*100
+        amount = int(price)*100
         headers = {
             'content-type': 'application/json',
         }
