@@ -36,7 +36,7 @@
                     {% for i in orders %}
                         <h5 class="card-title">{{i.bid.project.name}}</h5>
                         <h5>Created On : {{i.created_on}}</h5>
-                        <h5>Budget : Rs {{i.bid.budget}}</h5>
+                        <h5>Budget : $ {{i.bid.budget}}</h5>
                     <hr>
                     {% endfor %}
                 </div>
@@ -60,7 +60,7 @@
                             <h5 class="card-title">{{i.order}}</h5>
                             <h5>Created by : {{i.created_by}}</h5>
                             <h5>Completed on : {{i.completed_on}}</h5>
-                            <h5>Budget : Rs {{i.budget}}</h5>
+                            <h5>Budget : $ {{i.budget}}</h5>
                         <hr>
                         {% endfor %}
                     </div>
