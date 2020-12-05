@@ -14,7 +14,6 @@ class VirtualCurrency(models.Model):
 
 
 class Tempwallet(models.Model):
-    order = models.ForeignKey(CompletedOrder, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     budget = models.FloatField(default=0)
 
@@ -27,4 +26,3 @@ class AccountDetails(models.Model):
     name = models.CharField(max_length=240)
     ifsc_code = models.CharField(max_length=11)
     verified = models.BooleanField(default=False)
-
