@@ -18,7 +18,7 @@ class categories(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length=60, unique=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    budget = models.IntegerField()
+    budget = models.FloatField()
     description = models.TextField(null=True, blank=True)
     file = models.FileField(upload_to="users/projects/%y/%m/%d", null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True)
@@ -41,7 +41,7 @@ class Project(models.Model):
 
 class Bid(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    budget = models.IntegerField(default=0)
+    budget = models.FloatField(default=0)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=255, null=True, blank=True)
     date_time = models.DateField()
@@ -56,7 +56,7 @@ class Order(models.Model):
     worker = models.ForeignKey(User, on_delete=models.CASCADE, related_name="worker")
 
     created_on = models.DateField(auto_now=True)
-    paid = models.IntegerField(default=0)
+    paid = models.FloatField(default=0)
 
     def __str__(self):
         return str(self.creator)
@@ -65,6 +65,6 @@ class Order(models.Model):
 class CompletedOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="seller")
     order = models.CharField(max_length=240)
-    budget = models.IntegerField(default=0)
+    budget = models.FloatField(default=0)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="buyer")
     completed_on = models.DateTimeField(auto_now=True)
