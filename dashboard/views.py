@@ -364,7 +364,7 @@ def billing(request):
     else:
         wallet = 0
     if Tempwallet.objects.filter(user=request.user).exists():
-        temp = Tempwallet.objects.filter(user=request.user).latest('order')
+        temp = Tempwallet.objects.filter(user=request.user)
     else:
         temp = 0
     if AccountDetails.objects.filter(user=request.user).exists():
@@ -374,11 +374,11 @@ def billing(request):
     if CompletedOrder.objects.filter(user=request.user).exists():
         completed = CompletedOrder.objects.filter(user=request.user)
         for i in completed:
-            temp = Tempwallet.objects.get(user=request.user, order=i)
+            temp = Tempwallet.objects.get(user=request.user)
             if temp.budget != 0:
-                if timezone.now() - i.completed_on >= timedelta(days=7):
+                if timezone.now() - i.completed_on >= timedelta(days=1):
                     price = VirtualCurrency.objects.get(user=request.user).budget
-                    VirtualCurrency.objects.filter(user=request.user).update(budget=int(price)+int(temp.budget))
+                    VirtualCurrency.objects.filter(user=request.user).update(budget=float(price)+float(temp.budget))
                     temp.budget = 0
                     temp.save()
         if VirtualCurrency.objects.get(user=request.user).budget > 0:
