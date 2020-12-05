@@ -22,10 +22,17 @@ def complete(request):
         obj = CompletedOrder(user=bidder, order=project.name, created_by=request.user)
         obj.save()
         bid = Bid.objects.get(created_by=bidder, project=project)
-        temp = Tempwallet(user=bidder, budget=int(bid.budget)*0.882, order=obj)
-        temp.save()
-        obj.budget = temp.budget
-        obj.save()
+        if Tempwallet.objects.filter(user=bidder).exists():
+            t = Tempwallet.objects.get(user=bidder)
+            t.budget = float(t.budget) + float(bid.budget)*0.882
+            t.save()
+            obj.budget = float(bid.budget)*0.882
+            obj.save()
+        else:
+            temp = Tempwallet(user=bidder, budget=float(bid.budget)*0.882, order=obj)
+            temp.save()
+            obj.budget = temp.budget
+            obj.save()
         x = Order.objects.get(bid=bid)
         filess = DeliverFiles.objects.filter(order=x)
         for files in filess:
