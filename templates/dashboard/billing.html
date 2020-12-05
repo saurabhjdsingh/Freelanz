@@ -43,7 +43,7 @@
                 <div class="card h-100 border-left-lg border-left-primary">
                     <div class="card-body">
                         <div class="small text-muted">Current wallet balance</div>
-                        <div class="h3">Rs. {{wallet}}</div>
+                        <div class="h3">$ {{wallet}}</div>
                         {% if withdraw == "yes" and verified == "yes" %}
                         <button onclick="mask()" class="text-arrow-icon small btn btn-primary" type="button" data-toggle="modal" data-target="#staticBackdrop">Withdraw your balance<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </button>
@@ -89,9 +89,9 @@
                     <div class="card-body">
                         <div class="small text-muted">Active order payment</div>
                         {% if temp != 0 %}
-                        <div class="h3">Rs. {{temp.budget}}</div>
+                        <div class="h3">$ {{temp.budget}}</div>
                         {% else %}
-                        <div class="h3">Rs. {{temp}}</div>
+                        <div class="h3">$ {{temp}}</div>
                         {% endif %}
                         <a class="text-arrow-icon small text-secondary" href="{% url 'projects:orders' %}">View order<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
@@ -103,7 +103,7 @@
                 <div class="card h-100 border-left-lg border-left-success">
                     <div class="card-body">
                         <div class="small text-muted">Refund amount</div>
-                        <div class="h3 d-flex align-items-center">Rs. {{refund.budget}}</div>
+                        <div class="h3 d-flex align-items-center">$ {{refund.budget}}</div>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 <div class="card h-100 border-left-lg border-left-success">
                     <div class="card-body">
                         <div class="small text-muted">Refund amount</div>
-                        <div class="h3 d-flex align-items-center">Rs. 0</div>
+                        <div class="h3 d-flex align-items-center">$ 0</div>
                     </div>
                 </div>
             </div>
