@@ -2,19 +2,21 @@ from django.db import models
 from django.contrib.auth.models import User
 from projects.models import CompletedOrder
 
+
 class Refund(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    budget = models.IntegerField(default=0)
-    
+    budget = models.FloatField(default=0)
+
+
 class VirtualCurrency(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    budget = models.IntegerField(default=0)
+    budget = models.FloatField(default=0)
 
 
 class Tempwallet(models.Model):
     order = models.ForeignKey(CompletedOrder, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    budget = models.IntegerField(default=0)
+    budget = models.FloatField(default=0)
 
 
 class AccountDetails(models.Model):
