@@ -17,10 +17,10 @@
                             <div class="page-header-icon"><i data-feather="user"></i></div>
                             Chat-<a href="/profile/{{ second_user.id }}">{{ second_user.username }}</a>
                             {% if order != "no" %}
-                                <div style="margin-left:520px; margin-top:16px;">
+                                <div style="margin-left:2.1em; margin-top:1em;">
                                     {% if order.worker.username == second_user.username %}
                                     <p> You have hired this person</p>
-                                    <p>To cancel this order kindly <a href="/contact">Contact-Us</a></p>
+                                    <p>To cancel this order kindly contact-us through live chat support.</p>
                                     {% if orderfiles != "no" %}
                                     <form method="POST" action="complete/">
                                     {% csrf_token %}
@@ -31,7 +31,7 @@
                                     {% endif %}
                                 {% else %}
                                     <p>You have been hired by this person</p>
-                                    <p>To cancel this order kindly <a href="/contact">Contact-Us</a></p>
+                                    <p>To cancel this order kindly contact-us through live chat support.</p>
                                 {%endif%}
                                 </div>
                             {% endif%}
@@ -107,7 +107,7 @@
                                             <p>Project description: {{i.1}}</p>
                                             <h5>Bid details</h5>
                                             <p>Bidder descirption: {{i.2}}</p>
-                                            <p>Bidder Amount: Rs {{i.3}}</p>
+                                            <p>Bidder Amount: $ {{i.3}}</p>
                                             <p>Bidder Finishing Time: {{i.4}}</p> 
                                             <form action="/payments/{{i.5}}/{{i.6}}" method="POST">
                                             {% csrf_token %}
@@ -135,7 +135,7 @@
                                         <p>Project description: {{i.1}}</p>
                                         <h5>Bid details</h5>
                                         <p>Bidder descirption: {{i.2}}</p>
-                                        <p>Bidder Amount: Rs {{i.3}}</p>
+                                        <p>Bidder Amount: $ {{i.3}}</p>
                                         <p>Bidder Finishing Time: {{i.4}}</p>
                                     <form action="/payments/{{i.5}}/{{i.6}}" method="POST">
                                             {% csrf_token %}
@@ -177,7 +177,7 @@
                                     <div class="modal-body">
                                         <h5>Biding details</h5>
                                         <p>descirption: {{i.0}}</p>
-                                        <p>Bidder Amount: Rs {{i.1}}</p>
+                                        <p>Bidder Amount: $ {{i.1}}</p>
                                         <p>Bidder Finishing Time: {{i.2}}</p>
                                         <form action="editbid/" method="POST">
                                         {% csrf_token %}
@@ -200,7 +200,7 @@
                                         {% for i in edit %}
                                         <div style="display:none;" id="bid{{forloop.counter0}}" class="conditionbid">                                             <h5>Biding details</h5>
                                             <p>descirption: {{i.0}}</p>
-                                            <p>Bidder Amount: Rs {{i.1}}</p>
+                                            <p>Bidder Amount: $ {{i.1}}</p>
                                             <p>Bidder Finishing Time: {{i.2}}</p>
                                             <form action="editbid/" method="POST">
                                             {% csrf_token %}
@@ -370,10 +370,6 @@
             messageInputDom.value = '';
             }
         };
-    function order(){
-        chatSocket.send(JSON.stringify({
-                'message': 'You just got hired for the project.'
-            }));
-    }
 </script>
 {% endblock ChatScript %}
+
