@@ -45,7 +45,7 @@
                         <div class="small text-muted">Current wallet balance</div>
                         <div class="h3">$ {{wallet}}</div>
                         {% if withdraw == "yes" and verified == "yes" %}
-                        <button onclick="mask()" class="text-arrow-icon small btn btn-primary" type="button" data-toggle="modal" data-target="#staticBackdrop">Withdraw your balance<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        <button onclick="mask()" class="text-arrow-icon small btn btn-primary" type="button" data-toggle="modal" data-target="#staticBackdrop">Contact us to withdraw your balance<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </button>
                 <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -71,9 +71,9 @@
                                     <label class="text-gray-600 small">Bank IFSC Code</label>
                                     <input disabled  value="{{account.ifsc_code}}" type="text" class="form-control form-control-solid py-4">
                                 </div>
-                                <form method="POST" action="/payments/processpayment/">
+                                <form>
                                 {% csrf_token %}
-                                <button class="text-arrow-icon small btn btn-primary" type="submit">Confirm<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                <button class="text-arrow-icon small btn btn-primary" type="submit">Contact us through live chat support<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                 </button>
                             </form>
                             </div>
