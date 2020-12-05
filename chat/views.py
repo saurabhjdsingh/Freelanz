@@ -29,7 +29,7 @@ def complete(request):
             obj.budget = float(bid.budget)*0.882
             obj.save()
         else:
-            temp = Tempwallet(user=bidder, budget=float(bid.budget)*0.882, order=obj)
+            temp = Tempwallet(user=bidder, budget=float(bid.budget)*0.882)
             temp.save()
             obj.budget = temp.budget
             obj.save()
