@@ -376,7 +376,7 @@ def billing(request):
         for i in completed:
             temp = Tempwallet.objects.get(user=request.user)
             if temp.budget != 0:
-                if timezone.now() - i.completed_on >= timedelta(days=1):
+                if timezone.now() - i.completed_on >= timedelta(days=10):
                     price = VirtualCurrency.objects.get(user=request.user).budget
                     VirtualCurrency.objects.filter(user=request.user).update(budget=float(price)+float(temp.budget))
                     temp.budget = 0
