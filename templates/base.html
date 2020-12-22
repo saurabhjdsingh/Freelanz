@@ -67,14 +67,6 @@
                 <a class="nav-link" href="/">Home
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/terms">Terms & Cond.
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/privacy">Privacy Policy
-                </a>
-              </li>
             {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'dashboard:dashboard' %}" >Dashboard</a>
