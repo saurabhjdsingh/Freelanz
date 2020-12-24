@@ -1,0 +1,853 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{ 
+    font-family: 'Poppins',Helvetica,Arial,Lucida,sans-serif;
+    color: rgb(41, 41, 41);
+}
+
+a{
+    text-decoration: none;
+    color: rgb(61, 61, 61);
+}
+
+.hamburger{
+    display: none;
+}
+
+.menubar{
+    height: 80px;
+    width: 100%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;  
+    position: fixed; 
+    color: rgb(61, 61, 61);
+    z-index: 3;
+    font-family: Poppins,sans-serif;
+    transition: 0.5s all;
+}
+
+.menuitems2{
+    display: none;
+}
+
+.menubar.scroll{
+    height: 60px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.267);
+}
+
+.logotext{
+    width: 40%;
+    font-family: Poppins,sans-serif;
+}
+
+.menuitems{
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 1rem;
+    list-style: none;     
+}
+
+.menuitems span{
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.menuitems a{
+    transition: 0.5s all ease-in-out;
+    font-family: 'Poppins',Helvetica,Arial,Lucida,sans-serif;
+
+}
+
+#shopingcart{
+    height : 20px;
+}
+
+.menuitems a:hover{
+    color: cornflowerblue;
+}
+
+/* find job row */
+
+.findjob{
+    width: 100%;
+    min-height: 120vh;
+    position: relative;    
+}
+
+.findjob img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    z-index: -2;
+}
+.bggradient{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right , blue , rgba(0, 0, 255, 0.418));
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.findjob h1{
+    font-size: 30vw;
+    color: white;
+    z-index: 1;
+    position: absolute;
+    bottom: 0%;
+    left: -3%;
+    transform: translateY(60%);
+    opacity: 0;
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: bolder;
+    transition: 2s all;
+}
+
+.findjob h1.scroll{
+    transform: translateY(40%);
+    opacity: 1;
+}
+
+.textarea{
+    height: 100vh;
+    width: 50%; 
+    margin-left: 15%;   
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.smalltxt{
+    font-family: 'Poppins',Helvetica,Arial,Lucida,sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    margin: 15px;
+    letter-spacing: 3px;
+}
+
+.bigtxt{
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+    font-size: 5rem;
+    font-weight: bold;
+    color: white;
+    margin: 15px;    
+}
+
+.buttondeck{
+    margin: 15px;
+    width: 100%;  
+    min-width: 100px;  
+    display: flex; 
+    flex-wrap: wrap;    
+}
+
+.buttons{
+    min-width: 200px;
+    background: white;
+    color: rgb(39, 209, 110);
+    margin: 15px;
+    margin-left: 0;
+    padding: 15px 0px 15px 30px;
+    border-radius: 5px; 
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    transition: 0.3s all ease-in-out;
+}
+.buttons:hover{
+    padding: 15px 30px;
+}
+
+.buttons:nth-child(1){
+    background: rgb(39, 209, 110);
+    color: white;
+}
+
+.buttons span{    
+    transform: translateX(0px);
+    margin: 0px 0px 0px 25px;
+    opacity: 0;
+    transition: 0.3s all ease-in-out;        
+}
+
+.buttons:hover span{      
+    opacity: 1;
+    transform: translateX(10px);
+}
+
+/* what we do*/
+
+.whatwedo{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;    
+    margin-top: 10%;
+}
+
+.whatwedo img{
+    width: 30%;    
+    object-fit: contain;
+    transform: translateX(50%);
+    opacity: 0;
+    transition: 1s all;
+}
+
+.whatwedo img.scroll{
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.whatwedo .right{
+    height: 100%;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.whatwedo .right h1{
+    font-size: 3rem;
+    margin: 25px;
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+}
+
+.whatwedo .carddeck{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.whatwedo .card{
+    width:40%;
+    height:300px;
+    margin: 25px;
+}
+
+.whatwedo .card h2{
+    font-size: 1.3rem;
+    margin: 8px;
+    color: rgb(43, 43, 43);
+    letter-spacing: 1px;
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+}
+
+.whatwedo .card p{
+    font-size: 1.05rem;
+    margin: 8px;
+    color: rgb(95, 95, 95);
+}
+
+.whatwedo .card a{
+    font-size: 0.8rem;
+    margin: 8px;
+    color: rgb(39, 209, 110);
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: rgba(128, 128, 128, 0.521);
+}
+
+/* we build */
+
+.webuild{
+    height: 140vh;
+    width:100%;    
+    overflow: hidden; 
+    margin-top: 10%;   
+}
+
+.webuild .indent{
+    height: 100%;
+    width: 100%;
+    transform: translateX(5%);
+    background: rgba(82, 92, 95,0.1);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    position: relative;
+}
+
+.webuild .textarea{
+    height: 80%;
+    min-width: 600px;    
+}
+
+.webuild .textarea h1{
+    color: rgb(48, 48, 48);
+    font-size: 3.4rem;
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+    margin-bottom: 20px;  
+    transform: translateX(50%);
+    opacity: 0;
+    transition: 1s all;  
+}
+
+.webuild .textarea h1.scroll{
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.webuild img{
+    width: 30%;
+    object-fit: contain;
+    margin: 10%;
+    transition: 2s all;
+    transform: rotate(60deg);
+    opacity: 0;
+    position: relative;
+}
+
+.webuild img.scroll{
+    transform: rotate(0deg);
+    opacity: 1;
+}
+
+.webuild p{
+    margin-top: 10%;
+    font-size: 1.1rem;
+    color: rgb(104, 104, 104);    
+}
+
+.webuild .createacc{
+    margin:0;
+    background: rgb(39, 209, 110);
+    color: white;
+    margin-top: 10%;
+    transition: 1s all;
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.webuild .createacc.scroll{
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.webuild .foottext{
+    font-size: 20vw;
+    color: rgb(255, 255, 255);
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(35%);
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: bolder;
+}
+
+/* hot listing */
+
+.hotlisting{
+    height: 100vh;
+    width: 100%;
+    margin-top: 10%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.hotlisting img{
+    width: 50%;
+    object-fit: contain;
+    height: 100%;
+    transition: 2s all;
+    transform: translateX(-50%);
+    opacity: 0;
+}
+
+.hotlisting img.scroll{
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.hotlisting .right{
+    width: 50%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.hotlisting h1{
+    font-size: 3.5rem;
+    margin: 20px;
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+}
+
+.hotlisting .box{
+    margin: 20px;
+}
+
+.hotlisting .box h2{
+    margin-bottom: 20px;
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+}
+
+.hotlisting .box p{
+    font-size: 1.1;
+    font-weight: bold;
+    color: rgb(85, 85, 85);
+}
+
+.hotlisting .box a{
+    font-size: 0.9rem;
+    margin-left: 10px;    
+    color: rgb(39, 209, 110);
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: rgba(128, 128, 128, 0.521);
+}
+
+.hotlisting .buttons{
+    background-color: rgb(39, 209, 110);
+    color: white;
+    margin: 20px;
+    transition: 1s all;
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.hotlisting .buttons.scroll{
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/*success*/
+
+.success{
+    height: 120vh;
+    width:100%;    
+    overflow: hidden;        
+}
+
+.success .indent{
+    height: 100%;
+    width: 100%;
+    transform: translateX(-4%);
+    background: #002ed4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.success .foottext{
+    font-size: 23vw;
+    color: rgb(255, 255, 255);
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translateY(30%);
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: bolder;
+}
+
+.success h2{
+    font-size: 12rem;
+    font-weight: 10;
+    line-height: 100px;
+    color:  rgb(39, 209, 110);
+    font-family: 'ETmodules';
+    transition: 1s all;
+    transform: translateY(-100%);
+    opacity: 0;
+    font-family: 'Proza Libre', sans-serif;
+}
+
+.success h2.scroll{
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+
+.success .sliderdeck{    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30%;
+    width: 80%;
+    border: 10px solid #002ed4 ;
+}
+
+.bx-wrapper {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 0;
+    width: 100%;   
+  }
+
+.slide{
+    height:30vh;
+    width:100vw;
+    background: #002ed4;
+    text-align: center;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+.slide p{
+    font-weight: 300;
+    font-style: italic;
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+
+}
+
+.slide h5{
+    font-size: 1.2rem;
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+
+}
+
+/*trending*/
+.trending{
+    height: 120vh;
+    width:100%;    
+    overflow: hidden;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;         
+}
+
+.trending .indent{
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.trending h1{
+    font-size: 3.5rem;
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+}
+
+.trending .carddeck{
+    height: 60%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    align-self: center;
+}
+
+.trending .card{
+    width: 49%;    
+    height: 200px;
+    position: relative;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: 1s all;
+    -moz-transition-delay: 1s;
+    transition-delay:1s;
+}
+
+.trending .card.scroll{
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.trending .card img{
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: cover;
+}
+
+.trending .card a{
+    position: absolute;
+    font-size: 4rem;
+    left: 0;
+    bottom: 0;
+    color: white;
+    font-weight: bold;
+    transform: translateY(10%);
+    font-family: 'Raleway',Helvetica,Arial,Lucida,sans-serif;
+}
+
+.trending .buttons{
+    background: rgb(39, 209, 110);
+    color: white;
+    align-self: center;
+}
+
+/* mobile vertion */
+
+@media only screen and (max-width: 798px) {
+    /* navigation bar*/
+        *{
+            min-width: 0;
+            margin: 0;
+        }
+
+        body{
+            width:100%;
+            overflow: auto;
+        }
+
+        .menubar{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #shopingcart{
+            align-self: flex-start;
+            margin-top: 0px;
+        }
+
+        .hamburger{
+            display: inline;            
+            width: 20px;         
+        }        
+        .menuitems2{
+            position: absolute;
+            font-size: 14px;            
+            width: 350px;
+            height: 400px;
+            font-weight: 600;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-around;
+            padding-left: 20px;
+            flex-direction: column; 
+            list-style: none;  
+            background-color: #fff; 
+            top: 12vh; 
+            left: 50%;
+            transform: translateX(-50%); 
+            box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.199);
+            z-index: 4;  
+            overflow: hidden;   
+            transition: 1s all ease-in-out;
+            clip: rect(0px,600px,0px,0px);
+        }
+
+        .logotext{
+            width: 70%;
+            font-size: 1.2rem;
+        }
+
+        .menuitems2.click{
+            clip: rect(0px,600px,800px,0px);
+        } 
+        
+        .menuitems{
+            display: none;
+        }
+
+        /* find job row */
+
+        .buttondeck{
+            widows: 100%;
+        }
+
+        .textarea{
+            position: relative;
+            width: 100%;
+            margin: 0;
+            margin-top: 40px;
+        }
+
+        .smalltxt{            
+            font-size: 1.1rem;            
+        }
+
+        .bigtxt{
+            font-size:3rem;    
+        }
+
+        /* what we do*/
+
+        .whatwedo{            
+            flex-direction: column;
+            height: auto;
+        }
+
+        .whatwedo img{
+            width: 80%;
+        }
+
+        .whatwedo .right{
+            width: 100%;            
+        }
+
+        .whatwedo .right h1{
+            font-size: 2.5rem;
+            font-weight: 1000;
+            margin-top: 20%;
+        }
+
+        .whatwedo .carddeck{
+            justify-content: space-around;
+            margin-top: 10%;
+        }
+
+        .whatwedo .card{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width:100%;
+            height:250px;
+        }
+
+        /* we build */
+        .webuild{
+            height: auto;            
+            widows: 100vw;
+        }
+        .webuild .indent{
+            flex-direction: column;           
+            padding: 70px;
+            padding-left: 30px;
+        }
+
+        .webuild img{
+            width: 100%;
+            height: 90%;
+            position: relative;
+        }
+
+        .webuild .textarea{
+            height: 100%; 
+            min-width: 0;
+            margin-top: 0; 
+        }
+
+        .webuild .textarea h1{
+            font-size: 2.25rem;
+        }
+
+        .webuild .textarea p{
+            margin-top: 80px;
+            font-size: 1rem
+        }
+
+        .webuild .buttons{
+            align-self: flex-start;
+            font-size: 0.8rem;
+            padding: 20px 25px;
+        }
+
+        .webuild .foottext{
+            transform: translateY(2px);
+        }
+        /* hot listing */
+
+        .hotlisting{
+            flex-direction: column;
+            margin-top: 30%;
+            height: auto;
+        }
+
+        .hotlisting img{
+            align-self: center;
+            width: 80%;
+        }
+
+        .hotlisting .right{
+            width: 100%;
+        }
+
+        .hotlisting .right h1{
+            font-size: 2.25rem;
+            margin-bottom: 20%;
+        }
+
+        .hotlisting .box p{
+            font-size: 1.05rem;
+        }
+
+        .hotlisting .box a{
+            font-size: 0.8rem;
+        }
+
+        .hotlisting .buttons{
+            align-self: center;
+        }
+
+        /*success*/
+        .success{
+            height: 150vh;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .success .sliderdeck{    
+            height: 100vh;                       
+        }
+
+        .slide{
+            height:80vh;
+            padding: 50px;            
+        }
+
+        .slide p{
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .success .foottext{
+            transform: translateY(3px);
+        }
+
+        .success .indent{
+            transform: translateX(-2%);
+        }
+        /*trending*/
+        .trending{
+            height:auto ;
+            width:  100%;   
+        }
+
+        .trending h1{
+            font-size: 2.3rem;
+            margin: 130px 0px;
+            align-self: flex-start;
+        }
+
+        .trending .carddeck{
+            width: 100%;
+            margin: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .trending .card{
+            width: 100%;
+            margin: 30px 0px; 
+            height: 200px;                           
+        }
+
+        .trending .card a{
+            font-size: 2.5rem;
+        }
+}

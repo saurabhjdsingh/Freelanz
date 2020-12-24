@@ -1,324 +1,177 @@
 <!DOCTYPE html>
-{% extends 'base.html' %}
 {% load static %}
-{% block body_block %}
-<div class ="main_body">
-<div class="banner">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 banner-text">
-            <h1 class="mb-5">
-              Share your knowledge for other <em>Technology</em>
-            </h1>
-            <p class="mb-5">
-              Have knowledge & experience in your respective field then share it
-              to the world , make money of your choice & ask money from big
-              companies by solving there problems.
-            </p>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177632222-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-177632222-1');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/icon" href="{% static 'pics/thinkgroupy.jpg' %}" />
+    <title>Thinkgroupy | re-imagine your boundaries</title>
+    <script src="{% static 'js/app.js' %}"></script>
+</head>
+<body>
+    <nav class="menubar">
+        <h1 class="logotext"><a href="/">Thinkgroupy</a></h1>
+        <ul class="menuitems">
+            <a href="/"><li>Home</li></a>
             {% if user.is_authenticated %}
-                <a href="{% url 'dashboard:dashboard' %}" class="hover-effect">
-                DASHBOARD <i class="fas fa-caret-right"></i>
-                 </a>
-            {% else %}
-                 <a href="signup" class="hover-effect">
-                REGISTER OR LOGIN <i class="fas fa-caret-right"></i>
-                 </a>
+                <a href="/dashboard"><li>Dashboard</li></a>
+                <a href="/signout"><li>Logout</li></a>
+            {% else %}         
+            <a href="/signup"><li>Sign-Up</li></a>
+            <a href="/signin"><li>Login</li></a>
             {% endif %}
-          </div>
-          <div class="col-lg-6">
-            <img class="banner-img" src="{% static 'pics/coding-isometric-01.png' %}" alt="" />
-          </div>
+            <a href="/contact"><li>Contact</li></a>
+        </ul>
+        <img src="{% static 'pics/Hamburger_icon.svg.png' %}" alt="" class="hamburger" onclick="clicked()">
+    </nav> 
+    <ul class="menuitems2">
+        <a href="/"><li>Home</li></a>
+        {% if user.is_authenticated %}
+            <a href="/dashboard"><li>Dashboard</li></a>
+            <a href="/signout"><li>Logout</li></a>
+        {% else %}         
+        <a href="/signup"><li>Sign-Up</li></a>
+        <a href="/signin"><li>Login</li></a>
+        {% endif %}
+        <a href="/contact"><li>Contact</li></a>
+    </ul>
+    <div class="findjob">
+        <img src="{% static 'pics/job_recruitement_01.jpg' %}" alt="">
+        <div class="bggradient"></div>
+        <div class="textarea">
+            <p class="smalltxt">THE EASIEST WAY TO EARN MONEY</p>
+            <p class="bigtxt">Find & Post Projects</p>
+            <div class="buttondeck">
+                <a href="/projects/" class="buttons">LOOKING TO EARN MONEY? <span>&#8594</span></a>
+                <a href="/projects/new/" class="buttons">SEARCHING FOR TALENT?<span>&#8594</span></a>   
+            </div>
         </div>
-      </div>
+        <h1 class="foottext">Hired</h1>
     </div>
-    <div class="courses-section mt-5 mb-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-12 col-sm-12 courses-text">
-            <div class="relative-parent">
-              <h1 class="before-green">
-                100’s of Courses
-              </h1>
+    <div class="whatwedo">
+        <img src="{% static 'pics/job_recruitement_11-1.png' %}" alt="">
+        <div class="right">
+            <h1>What Is Thinkgroupy?</h1>
+            <div class="carddeck">
+                <div class="card">
+                    <h2>Connect People with the Right Talent for Them</h2>
+                    <p>We Make Sure You Can Make Money By Your Talent. Thereby We Let You Apply For Projects (Tasks) And Get Paid.</p>
+                    <a href="/projects/">BROWSE PROJECTS</a>
+                </div>
+                <div class="card">
+                    <h2>Get Your Work Done</h2>
+                    <p>We Understand Your Situation Of Finding A Specialists To Do Your Work. That To Even At Low Cost Thereby We Made This Community So That You Can Post Projects (Tasks) And Best Freelancers & Professionals around the world, Based On Their Expertise Can Bid And You Get The Best Results.</p>
+                    <a href="/projects/new/">POST PROJECT</a>
+                </div>
             </div>
-            <h4 class="mt-3">
-              Get all free courses of your interest just for free from all big
-              companies
-            </h4>
-            <p class="mt-4 mb-5">
-              Here,you will be provided with 100’s of free courses from big
-              experienced companies such as udemy ,linkedin learning ,
-              codeacedmy ,etc.
-            </p>
-            {% if user.is_authenticated %}
-                <a href="{% url 'dashboard:dashboard' %}" class="hover-effect">
-                DASHBOARD <i class="fas fa-caret-right"></i>
-                 </a>
-            {% else %}
-                 <a class="hover-effect" href="signin">
-                LOGIN TO VIEW ALL COURSES <i class="fas fa-caret-right"></i>
-                </a>
-            {% endif %}
-          </div>
-          <div class="row col-lg-8 col-md-12 col-sm-12 course-desc">
-            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
-              <div class="course-img col-lg-4">
-                <img src="{% static 'pics/coding-icon_8.jpg' %}" alt="" />
-              </div>
-              <div class="course-rest col-lg-8">
-                <h1>
-                  Web Development
-                </h1>
-                <p>
-                  Web development broadly refers to the tasks associated with
-                  developing websites for hosting via intranet or internet. The
-                  web development process includes web design, web content
-                  development, client-side/server-side scripting and network
-                  security configuration, among other tasks.
-                </p>
-              </div>
-            </div>
-            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
-              <div class="course-img col-lg-4">
-                <img src="{% static 'pics/coding-icon_4.jpg' %}" alt="" />
-              </div>
-              <div class="course-rest col-lg-8">
-                <h1>
-                  Debugging
-                </h1>
-                <p>
-                  Debugging is the routine process of locating and removing
-                  computer program bugs, errors or abnormalities, which is
-                  methodically handled by software programmers via debugging
-                  tools. Debugging checks, detects and corrects errors or bugs
-                  to allow proper program operation according to set
-                  specifications.
-                </p>
-              </div>
-            </div>
-            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
-              <div class="course-img col-lg-4">
-                <img src="{% static 'pics/coding-icon_1.jpg' %}" alt="" />
-              </div>
-              <div class="course-rest col-lg-8">
-                <h1>
-                  Python
-                </h1>
-                <p>
-                  Use python videos to explore the python world & then use it
-                </p>
-              </div>
-            </div>
-            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
-              <div class="course-img col-lg-4">
-                <img src="{% static 'pics/coding-icon_7.jpg' %}" alt="" />
-              </div>
-              <div class="course-rest col-lg-8">
-                <h1>
-                  Javascript
-                </h1>
-                <p>
-                  Fix Javascript for others for earning
-                </p>
-              </div>
-            </div>
-            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
-              <div class="course-img col-lg-4">
-                <img src="{% static 'pics/coding-icon_3.jpg' %}" alt="" />
-              </div>
-              <div class="course-rest col-lg-8">
-                <h1>
-                  UX Design
-                </h1>
-                <p>
-                  the design of the entire process of acquiring and integrating
-                  the product, including aspects of branding, design, usability
-                  and function.
-                </p>
-              </div>
-            </div>
-            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
-              <div class="course-img col-lg-4">
-                <img src="{% static 'pics/coding-icon_5.jpg' %}" alt="" />
-              </div>
-              <div class="course-rest col-lg-8">
-                <h1>
-                  Database Design
-                </h1>
-                <p>
-                  The designer determines what data must be stored and how the
-                  data elements interrelate.
-                </p>
-              </div>
-            </div>
-            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
-              <div class="course-img col-lg-4">
-                <img src="{% static 'pics/coding-icon_2.jpg' %}" alt="" />
-              </div>
-              <div class="course-rest col-lg-8">
-                <h1>
-                  HTML & CSS
-                </h1>
-                <p>
-                  Fix problems with the HTML & css of other big gaint & earn
-                  money
-                </p>
-              </div>
-            </div>
-            <div class="courses col-lg-6 col-md-6 col-sm-12 row">
-              <div class="course-img col-lg-4">
-                <img src="{% static 'pics/coding-icon_6.jpg' %}" alt="" />
-              </div>
-              <div class="course-rest col-lg-8">
-                <h1>
-                  Apps & Games
-                </h1>
-                <p>
-                  learn & try to do experiments with apps & games then convert
-                  your talent into money
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-    <div class="expert">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 expert-img">
-            <img src="{% static 'pics/coding-isometric-02.png' %}" alt="" />
-          </div>
-          <div class="col-lg-6 expert-text">
-            <div class="relative-parent">
-              <h1 class="before-green">Become an expert</h1>
+    <div class="webuild"> 
+        <div class="indent">
+            <div class="textarea"> 
+                <h1>We Build Lasting Relationships<br>
+                    Between Freelancers<br>
+                    & Businesses</h1>
+                <p>
+                    We understand the importance for both freelancers and other businesses or individual. So that they get the best work at low prices with best results. Thereby we ourselves take care of everydeal with 24*7 chat support and ticket solving resolutions.<strong> We understand your time and money</strong> thereby we just give the best of everyone i.e. for you.<br><br>
+                    We understand how important is it for you (Freelancers) to get payment thereby we instead of taking 20% + taxes as a commission take <strong>only 10% commission instead of 20% like Fiver,etc.</strong> Even we settle the payments as soon as we can and not like 14-20 days like other freelancing platforms such as fiverr,etc.
+                </p>
+                <a href="/projects/category" class="buttons createacc">LOOKING FOR A WAY TO EARN? <span>&#8594</span></a>
             </div>
-            <br />
-            <p>
-              Create your group & earn maximum points in that group to become
-              group leader & also reach in the expert list .
-            </p>
-            <p>
-              <strong
-                >experts will get every query regarding the companies first &
-                then it will reach to the other groups & on ground
-                level.</strong
-              >
-            </p>
-          </div>
-        </div>
-      </div>
+            <img src="{% static 'pics/job_recruitement_13.png' %}" alt="">            
+            <h1 class="foottext">Projects</h1>
+        </div>         
     </div>
-    <div class="learn">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 learn-text">
-            <img
-              src="{% static 'pics/logo.jpg' %}"
-              class="mb-3"
-              alt=""
-            />
-            <div class="relative-parent">
-              <h1 class="before-green">Learn by Doing</h1>
+    <div class="hotlisting">
+        <img src="{% static 'pics/job_recruitement_12.png' %}" alt="">
+        <div class="right">
+            <h1>Trending Projects</h1>                            
+                <div class="box">
+                    <h2>Android App</h2>
+                    <p>We Need An Android App for a food... –<a href="projects/Programming & Tech">$1500 VIEW PROJECT</a></p>
+                </div>
+                <div class="box">
+                    <h2>Product Manager</h2>
+                    <p>We Want Someone To Handle Our Social Media Platforms & ... –<a href="projects/Business Services">$100 VIEW PROJECT</a></p>
+                </div>
+                <a href="/projects/category" class="buttons">VIEW ALL OPPORTUNITIES<span>&#8594</span></a>
+        </div>
+    </div>
+    <div class="success">
+        <div class="indent">
+            <h2 class="head">"</h2>
+            <div class="sliderdeck">
+                <div class="slider">
+                    <div class="slide">
+                        <p>“Up until the last 200 years basically everyone was a freelancer, entrepreneur or indentured. Of course entrepreneurship is a learnable skill.”</p> 
+                        <h5>- Richie Norton</h5>
+                    </div>
+                    <div class="slide">
+                        <p>“Freelancers have allowed us to achieve things that would have been impossible otherwise.”</p> 
+                        <h5>- Beth Granai</h5>
+                    </div>
+                    <div class="slide">
+                        <p>“Start where you are. Use what you have. Do what you can.”</p> 
+                        <h5>― Arthur Ashe</h5>
+                    </div>
+                    <div class="slide">
+                        <p>“The future starts today, not tomorrow.”</p> 
+                        <h5>- Pope John Paul II</h5>
+                    </div>                    
+                </div>
+            </div>            
+            <h1 class="foottext">Success</h1>            
+        </div>        
+    </div>
+    <div class="trending">
+        <div class="indent">
+            <h1>Trending Categories</h1>
+            <div class="carddeck">
+                <div class="card slidleft">
+                    <img src="{% static 'pics/job_recruitement_04.jpg' %}" alt="">
+                    <a href="projects/Programming & Tech">Tech</a>
+                </div>
+                <div class="card slidleft">
+                    <img src="{% static 'pics/job_recruitement_05.jpg' %}" alt="">
+                    <a href="/projects/Music & Audio">Music & Audio</a>
+                </div> 
+                <div class="card slidleft">
+                    <img src="{% static 'pics/job_recruitement_03.jpg' %}" alt="">
+                    <a href="/projects/Business Services">Cunsulting</a>
+                </div> 
+                <div class="card slidleft">
+                    <img src="{% static 'pics/job_recruitement_07.jpg' %}" alt="">
+                    <a href="/projects/Content & Translation">Education</a>
+                </div>
             </div>
-            <br />
-            <p>
-              <b>Learn before doing anything in the real world</b>
-            </p>
-            <p>
-              When you will do and practice the fixing in real world then you
-              will gain experience & knowledge with complete experience will
-              give you a lot of luxury in life.
-            </p>
-          </div>
-          <div class="col-lg-6 expert-img">
-            <img src="{% static 'pics/coding-isometric-03.png' %}" alt="" />
-          </div>
-        </div>
-      </div>
+            <a href="/projects/category" class="buttons">BROWSE ALL<span>&#8594</span></a>
+        </div>        
     </div>
-    <div class="learn mb-0">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 expert-img">
-            <img src="{% static 'pics/coding-isometric-04.png' %}" alt="" />
-          </div>
-          <div class="col-lg-6 learn-text">
-            <img
-              src="{% static 'pics/coding-iconArtboard-19-copy-9.jpg' %}"
-              class="mb-3"
-              alt=""
-            />
-            <div class="relative-parent">
-              <h1 class="before-green">Build your Group portfolio</h1>
-            </div>
-            <br />
-            <p>
-              <b
-                >Build portfolio for your group in order to earn more attraction
-                from companies & earn order from them.</b
-              >
-            </p>
-            <p>
-              leader will have the right to change the group portfolio + the
-              person who is the owner of the group will have the right to do so.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="learn mt-0">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 learn-text">
-            <img
-              src="{% static 'pics/coding-iconArtboard-19-copy-10.jpg' %}"
-              class="mb-3"
-              alt=""
-            />
-            <div class="relative-parent">
-              <h1 class="before-green">Achieve your goals</h1>
-            </div>
-            <br />
-            <p>
-              <b
-                >Complete your goals on time & then earn money as promissed on
-                time.</b
-              >
-            </p>
-            <p>
-              All members who have granted any kind of help in the project
-              according to the respected ratio will earn in there respected
-              ratio money only.
-            </p>
-          </div>
-          <div class="col-lg-6 expert-img">
-            <img src="{% static 'pics/coding-isometric-05.png' %}" alt="" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <h1>
-              Ready to get started?
-            </h1>
-            <p>
-              Get in touch, or create an account
-            </p>
-          </div>
-          <div class="col-md-6">
-            {% if user.is_authenticated %}
-                  <a class="link-two hover-effect" href="/contact">CONTACT US</a>
-            {% else %}
-                  <a class="link-one hover-effect" href="/signup">CREATE ACCOUNT</a>
-                  <a class="link-two hover-effect" href="/contact">CONTACT US</a>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-      <img src="{% static 'pics/download.svg' %}" class="footer-pic" alt="" />
-    </div>
-</div>
- {% endblock %}
+    <script>
+  function initFreshChat() {
+    window.fcWidget.init({
+      token: "e1bedc69-4845-4f44-b0df-5df34cf6b735",
+      host: "https://wchat.in.freshchat.com"
+    });
+  }
+  function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.in.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"freshchat-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
+</script>
+</body>
+</html>
