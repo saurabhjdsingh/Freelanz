@@ -12,9 +12,9 @@ class ProfileAdmin(ModelAdmin):
 admin.site.register(Profile, ProfileAdmin)
 
 class UserPhoneAdmin(ModelAdmin):
-    list_display = ["user", "phone"]
+    list_display = ["verified","user", "phone"]
     search_fields = ["user", "phone"]
-    list_filter = ["user", "phone"]
+    list_filter = ["verified","user", "phone"]
 
 
 admin.site.register(UserPhone, UserPhoneAdmin)
