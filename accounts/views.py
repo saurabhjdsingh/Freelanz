@@ -11,7 +11,6 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from payments.models import VirtualCurrency, Refund
 UserModel = get_user_model()
 
 
@@ -69,10 +68,6 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        obj = VirtualCurrency(user=user)
-        obj.save()
-        obje = Refund(user=user)
-        obje.save()
         return redirect('accounts:account_activated')
     else:
         return redirect('accounts:account_activated_false')
@@ -110,4 +105,3 @@ def signin(request):
 def signout(request):
     logout(request)
     return render(request, 'accounts/signin.html')
-
