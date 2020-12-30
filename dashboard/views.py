@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from django.http.response import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
@@ -48,6 +47,17 @@ def notify(request):
 
 @login_required
 def dashboard(request):
+    user = request.user
+    if VirtualCurrency.objects.filter(user=request.user).exists():
+        pass
+    else:
+        obj = VirtualCurrency(user=user)
+        obj.save()
+    if Refund.objects.filter(user=request.user).exists():
+        pass
+    else:
+        obje = Refund(user=user)
+        obje.save()
     time = []
     monthly = 0
     yearly = 0
@@ -408,5 +418,3 @@ def billing(request):
                    "verified": verified,
                    "budget": budget,
                    "refund": refund})
-
-
