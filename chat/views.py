@@ -131,6 +131,16 @@ def room(request, username):
     projects = []
     bidforvalidation = []
     edit = []
+    if VirtualCurrency.objects.filter(user=first_user).exists():
+        pass
+    else:
+        obj = VirtualCurrency(user=first_user)
+        obj.save()
+    if Refund.objects.filter(user=first_user).exists():
+        pass
+    else:
+        obje = Refund(user=first_user)
+        obje.save()
     if first_user == second_user:
         return redirect("/")
     if not Order.objects.filter(creator=request.user, worker=second_user).exists() and not Order.objects.filter(creator=second_user, worker=first_user).exists():
