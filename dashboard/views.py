@@ -361,6 +361,18 @@ def otp_phone_verify(request, phone):
 
 @login_required
 def billing(request):
+    user = request.user
+    if VirtualCurrency.objects.filter(user=request.user).exists():
+        pass
+    else:
+        obj = VirtualCurrency(user=user)
+        obj.save()
+    if Refund.objects.filter(user=request.user).exists():
+        pass
+    else:
+        obje = Refund(user=user)
+        obje.save()
+        
     refund = Refund.objects.get(user=request.user)
     if request.method == "POST":
         name = request.POST.get('user_name')
