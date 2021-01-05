@@ -170,9 +170,12 @@ class UserListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         si = self.request.GET.get("si")
-        if si is None:
-            si = ""
-        profList = Profile.objects.filter(Q(location__icontains = si)|Q(gender__icontains = si)|Q(organization_name__icontains = si)).order_by("-id");
+        if si:
+            user = User.objects.get(username=si)
+            profList = Profile.objects.filter(Q(user=user)|Q(location__icontains = si)|Q(gender__icontains = si)|Q(organization_name__icontains = si)).order_by("-id");
+        else:
+            si=""
+            profList = Profile.objects.filter(Q(location__icontains = si)|Q(gender__icontains = si)|Q(organization_name__icontains = si)).order_by("-id");
         for p1 in profList:
             p1.followed = False
             ob = FollowUser.objects.filter(profile=p1, Followed_by=self.request.user)
