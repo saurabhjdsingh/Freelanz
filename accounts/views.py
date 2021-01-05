@@ -95,7 +95,7 @@ def signin(request):
                 if 'next_page' in locals():
                     return HttpResponseRedirect(next_page)
                 else:
-                    return render(request, 'dashboard/dashboard.html')
+                    return redirect('dashboard:dashboard')
             else:
                 messages.info(request, 'Username OR password is incorrect')
         context = {}
@@ -104,4 +104,4 @@ def signin(request):
 
 def signout(request):
     logout(request)
-    return render(request, 'accounts/signin.html')
+    return redirect('accounts:signin')
