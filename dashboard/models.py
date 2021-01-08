@@ -20,15 +20,15 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-    def save(self, *args, **kwargs):
-        super(Profile, self).save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         super(Profile, self).save(*args, **kwargs)
 
-        img = Image.open(self.image.path)
+#         img = Image.open(self.image.path)
 
-        if img.height > 200 or img.width > 200:
-            output_size = (200, 200)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+#         if img.height > 200 or img.width > 200:
+#             output_size = (200, 200)
+#             img.thumbnail(output_size)
+#             img.save(self.image.path)
 
     def get_absolute_url(self):
         return reverse("dashboard:profile", kwargs={'pk': self.pk})
