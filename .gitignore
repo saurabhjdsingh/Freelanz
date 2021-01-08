@@ -24,7 +24,7 @@ settings.ini
 # venv
 env
 venv
-# media
+media
 
 # other
 templates/.DS_Store
