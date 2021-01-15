@@ -2,7 +2,7 @@ $(document).ready(function(){
 $('.slider').bxSlider();
 });
 
-
+const partners = document.querySelectorAll('.partners .img')
 window.addEventListener("scroll",()=>{
     if(window.innerWidth < 700){        
         if(window.scrollY > 0){

@@ -1,178 +1,116 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load static %}
-<html lang="en">
-<head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177632222-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'UA-177632222-1');
-    </script>
-    <script data-ad-client="ca-pub-7054104070930116" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">     
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>    
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="icon" type="image/icon" href="{% static 'pics/thinkgroupy.jpg' %}" />
-    <title>Thinkgroupy | re-imagine your boundaries</title>
-    <script src="{% static 'js/app.js' %}"></script>
-</head>
-<body>
-    <nav class="menubar">
-        <h1 class="logotext"><a href="/">Thinkgroupy</a></h1>
-        <ul class="menuitems">
-            <a href="/"><li>Home</li></a>
-            {% if user.is_authenticated %}
-                <a href="/dashboard"><li>Dashboard</li></a>
-                <a href="/signout"><li>Logout</li></a>
-            {% else %}         
-            <a href="/signup"><li>Sign-Up</li></a>
-            <a href="/signin"><li>Login</li></a>
-            {% endif %}
-            <a href="/contact"><li>Contact</li></a>
-        </ul>
-        <img src="{% static 'pics/Hamburger_icon.svg.png' %}" alt="" class="hamburger" onclick="clicked()">
-    </nav> 
-    <ul class="menuitems2">
-        <a href="/"><li>Home</li></a>
-        {% if user.is_authenticated %}
-            <a href="/dashboard"><li>Dashboard</li></a>
-            <a href="/signout"><li>Logout</li></a>
-        {% else %}         
-        <a href="/signup"><li>Sign-Up</li></a>
-        <a href="/signin"><li>Login</li></a>
-        {% endif %}
-        <a href="/contact"><li>Contact</li></a>
-    </ul>
-    <div class="findjob">
-        <img src="{% static 'pics/job_recruitement_01.jpg' %}" alt="">
-        <div class="bggradient"></div>
-        <div class="textarea">
-            <p class="smalltxt">WANT TO EARN MONEY OR HIRE SOME PROFESSIONAL?</p>
-            <p class="bigtxt">Find Or Post Jobs</p>
-            <div class="buttondeck">
-                <a href="/projects/" class="buttons">LOOKING TO EARN MONEY? <span>&#8594</span></a>
-                <a href="/projects/new/" class="buttons">SEARCHING FOR TALENT?<span>&#8594</span></a>   
-            </div>
+{% block body_block %}
+<div class="findjob">
+    <img src="{% static 'pics/job_recruitement_01.jpg' %}" alt="">
+    <div class="bggradient"></div>
+    <div class="textarea">
+        <p class="smalltxt">WANT TO EARN MONEY OR HIRE SOME PROFESSIONAL?</p>
+        <p class="bigtxt">Find Or Post Jobs</p>
+        <div class="buttondeck">
+            <a href="/projects/" class="buttons">LOOKING TO EARN MONEY? <span>&#8594</span></a>
+            <a href="/projects/new/" class="buttons">SEARCHING FOR TALENT?<span>&#8594</span></a>   
         </div>
-        <h1 class="foottext">Hired</h1>
     </div>
-    <div class="whatwedo">
-        <img src="{% static 'pics/job_recruitement_11-1.png' %}" alt="">
-        <div class="right">
-            <h1>What Is Thinkgroupy?</h1>
-            <div class="carddeck">
-                <div class="card">
-                    <h2>Connect People with the Right Talent for Them</h2>
-                    <p>We Make Sure You Can Make Money By Your Talent. Thereby We Let You Apply For Projects (Tasks) And Get Paid.</p>
-                    <a href="/projects/">BROWSE PROJECTS</a>
-                </div>
-                <div class="card">
-                    <h2>Get Your Work Done</h2>
-                    <p>We Understand Your Situation Of Finding A Specialists To Do Your Work. That To Even At Low Cost Thereby We Made This Community So That You Can Post Projects (Tasks) And Best Freelancers & Professionals around the world, Based On Their Expertise Can Bid And You Get The Best Results.</p>
-                    <a href="/projects/new/">POST PROJECT</a>
-                </div>
+    <h1 class="foottext">Hired</h1>
+</div>
+<div class="whatwedo">
+    <img src="{% static 'pics/job_recruitement_11-1.png' %}" alt="">
+    <div class="right">
+        <h1>What Is Thinkgroupy?</h1>
+        <div class="carddeck">
+            <div class="card">
+                <h2>Connect People with the Right Talent for Them</h2>
+                <p>We Make Sure You Can Make Money By Your Talent. Thereby We Let You Apply For Projects (Tasks) And Get Paid.</p>
+                <a href="/projects/">BROWSE PROJECTS</a>
+            </div>
+            <div class="card">
+                <h2>Get Your Work Done</h2>
+                <p>We Understand Your Situation Of Finding A Specialists To Do Your Work. That To Even At Low Cost Thereby We Made This Community So That You Can Post Projects (Tasks) And Best Freelancers & Professionals around the world, Based On Their Expertise Can Bid And You Get The Best Results.</p>
+                <a href="/projects/new/">POST PROJECT</a>
             </div>
         </div>
     </div>
-    <div class="webuild"> 
-        <div class="indent">
-            <div class="textarea"> 
-                <h1>We Build Lasting Relationships<br>
-                    Between Freelancers<br>
-                    & Businesses</h1>
-                <p>
-                    We understand the importance for both freelancers and other businesses or individual. So that they get the best work at low prices with best results. Thereby we ourselves take care of everydeal with 24*7 chat support and ticket solving resolutions.<strong> We understand your time and money</strong> thereby we just give the best of everyone i.e. for you.<br><br>
-                    We understand how important is it for you (Freelancers) to get payment thereby we instead of taking 20% + taxes as a commission take <strong>only 10% commission instead of 20% like Fiver,etc.</strong> Even we settle the payments as soon as we can and not like 14-20 days like other freelancing platforms such as fiverr,etc.
-                </p>
-                <a href="/projects/category" class="buttons createacc">LOOKING FOR A WAY TO EARN? <span>&#8594</span></a>
-            </div>
-            <img src="{% static 'pics/job_recruitement_13.png' %}" alt="">            
-            <h1 class="foottext">Projects</h1>
-        </div>         
-    </div>
-    <div class="hotlisting">
-        <img src="{% static 'pics/job_recruitement_12.png' %}" alt="">
-        <div class="right">
-            <h1>Trending Projects</h1>                            
-                <div class="box">
-                    <h2>Android App</h2>
-                    <p>We Need An Android App for a food... –<a href="projects/Programming & Tech">$1500 VIEW PROJECT</a></p>
-                </div>
-                <div class="box">
-                    <h2>Product Manager</h2>
-                    <p>We Want Someone To Handle Our Social Media Platforms & ... –<a href="projects/Business Services">$100 VIEW PROJECT</a></p>
-                </div>
-                <a href="/projects/category" class="buttons">VIEW ALL OPPORTUNITIES<span>&#8594</span></a>
+</div>
+<div class="webuild"> 
+    <div class="indent">
+        <div class="textarea"> 
+            <h1>We Build Lasting Relationships<br>
+                Between Freelancers<br>
+                & Businesses</h1>
+            <p>
+                We understand the importance for both freelancers and other businesses or individual. So that they get the best work at low prices with best results. Thereby we ourselves take care of everydeal with 24*7 chat support and ticket solving resolutions.<strong> We understand your time and money</strong> thereby we just give the best of everyone i.e. for you.<br><br>
+                We understand how important is it for you (Freelancers) to get payment thereby we instead of taking 20% + taxes as a commission take <strong>only 10% commission instead of 20% like Fiver,etc.</strong> Even we settle the payments as soon as we can and not like 14-20 days like other freelancing platforms such as fiverr,etc.
+            </p>
+            <a href="/projects/category" class="buttons createacc">LOOKING FOR A WAY TO EARN? <span>&#8594</span></a>
         </div>
-    </div>
-    <div class="success">
-        <div class="indent">
-            <h2 class="head">"</h2>
-            <div class="sliderdeck">
-                <div class="slider">
-                    <div class="slide">
-                        <p>“Up until the last 200 years basically everyone was a freelancer, entrepreneur or indentured. Of course entrepreneurship is a learnable skill.”</p> 
-                        <h5>- Richie Norton</h5>
-                    </div>
-                    <div class="slide">
-                        <p>“Freelancers have allowed us to achieve things that would have been impossible otherwise.”</p> 
-                        <h5>- Beth Granai</h5>
-                    </div>
-                    <div class="slide">
-                        <p>“Start where you are. Use what you have. Do what you can.”</p> 
-                        <h5>― Arthur Ashe</h5>
-                    </div>
-                    <div class="slide">
-                        <p>“The future starts today, not tomorrow.”</p> 
-                        <h5>- Pope John Paul II</h5>
-                    </div>                    
-                </div>
-            </div>            
-            <h1 class="foottext">Success</h1>            
-        </div>        
-    </div>
-    <div class="trending">
-        <div class="indent">
-            <h1>Trending Categories</h1>
-            <div class="carddeck">
-                <div class="card slidleft">
-                    <img src="{% static 'pics/job_recruitement_04.jpg' %}" alt="">
-                    <a href="projects/Programming & Tech">Tech</a>
-                </div>
-                <div class="card slidleft">
-                    <img src="{% static 'pics/job_recruitement_05.jpg' %}" alt="">
-                    <a href="/projects/Music & Audio">Music & Audio</a>
-                </div> 
-                <div class="card slidleft">
-                    <img src="{% static 'pics/job_recruitement_03.jpg' %}" alt="">
-                    <a href="/projects/Business Services">Cunsulting</a>
-                </div> 
-                <div class="card slidleft">
-                    <img src="{% static 'pics/job_recruitement_07.jpg' %}" alt="">
-                    <a href="/projects/Content & Translation">Education</a>
-                </div>
+        <img src="{% static 'pics/job_recruitement_13.png' %}" alt="">            
+        <h1 class="foottext">Projects</h1>
+    </div>         
+</div>
+<div class="hotlisting">
+    <img src="{% static 'pics/job_recruitement_12.png' %}" alt="">
+    <div class="right">
+        <h1>Trending Projects</h1>                            
+            <div class="box">
+                <h2>Android App</h2>
+                <p>We Need An Android App for a food... –<a href="projects/Programming & Tech">$1500 VIEW PROJECT</a></p>
             </div>
-            <a href="/projects/category" class="buttons">BROWSE ALL<span>&#8594</span></a>
-        </div>        
+            <div class="box">
+                <h2>Product Manager</h2>
+                <p>We Want Someone To Handle Our Social Media Platforms & ... –<a href="projects/Business Services">$100 VIEW PROJECT</a></p>
+            </div>
+            <a href="/projects/category" class="buttons">VIEW ALL OPPORTUNITIES<span>&#8594</span></a>
     </div>
-    <script>
-  function initFreshChat() {
-    window.fcWidget.init({
-      token: "e1bedc69-4845-4f44-b0df-5df34cf6b735",
-      host: "https://wchat.in.freshchat.com"
-    });
-  }
-  function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.in.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"freshchat-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
-</script>
-</body>
-</html>
+</div>
+<div class="success">
+    <div class="indent">
+        <h2 class="head">"</h2>
+        <div class="sliderdeck">
+            <div class="slider">
+                <div class="slide">
+                    <p>“Up until the last 200 years basically everyone was a freelancer, entrepreneur or indentured. Of course entrepreneurship is a learnable skill.”</p> 
+                    <h5>- Richie Norton</h5>
+                </div>
+                <div class="slide">
+                    <p>“Freelancers have allowed us to achieve things that would have been impossible otherwise.”</p> 
+                    <h5>- Beth Granai</h5>
+                </div>
+                <div class="slide">
+                    <p>“Start where you are. Use what you have. Do what you can.”</p> 
+                    <h5>― Arthur Ashe</h5>
+                </div>
+                <div class="slide">
+                    <p>“The future starts today, not tomorrow.”</p> 
+                    <h5>- Pope John Paul II</h5>
+                </div>                    
+            </div>
+        </div>            
+        <h1 class="foottext">Success</h1>            
+    </div>        
+</div>
+<div class="trending">
+    <div class="indent">
+        <h1>Trending Categories</h1>
+        <div class="carddeck">
+            <div class="card slidleft">
+                <img src="{% static 'pics/job_recruitement_04.jpg' %}" alt="">
+                <a href="projects/Programming & Tech">Tech</a>
+            </div>
+            <div class="card slidleft">
+                <img src="{% static 'pics/job_recruitement_05.jpg' %}" alt="">
+                <a href="/projects/Music & Audio">Music & Audio</a>
+            </div> 
+            <div class="card slidleft">
+                <img src="{% static 'pics/job_recruitement_03.jpg' %}" alt="">
+                <a href="/projects/Business Services">Cunsulting</a>
+            </div> 
+            <div class="card slidleft">
+                <img src="{% static 'pics/job_recruitement_07.jpg' %}" alt="">
+                <a href="/projects/Content & Translation">Education</a>
+            </div>
+        </div>
+        <a href="/projects/category" class="buttons">BROWSE ALL<span>&#8594</span></a>
+    </div>        
+</div>
+{% endblock %}

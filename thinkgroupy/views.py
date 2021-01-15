@@ -4,6 +4,9 @@ from django.views.defaults import page_not_found
 def index(request):
     return render(request, 'index.html')
 
+def partners(request):
+    return render(request, 'partner.html')
+
 def terms(request):
     return render(request, 'terms.html')
 

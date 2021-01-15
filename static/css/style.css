@@ -1,3 +1,4 @@
+{% load static %}
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 *{
@@ -65,12 +66,9 @@ a{
 .menuitems a{
     transition: 0.5s all ease-in-out;
     font-family: 'Poppins',Helvetica,Arial,Lucida,sans-serif;
-
+    margin: 0px 5px;
 }
 
-#shopingcart{
-    height : 20px;
-}
 
 .menuitems a:hover{
     color: cornflowerblue;
@@ -850,4 +848,390 @@ a{
         .trending .card a{
             font-size: 2.5rem;
         }
+}
+
+
+/* ourvalueable */
+
+.circle {
+    position: absolute;
+    background-image: linear-gradient(to top right, rgba(128, 0, 128, 0.247), rgba(0, 0, 255, 0.178));
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    height: 500px;
+    width: 500px;
+    transform: translateY(-50%);
+    animation: example ease-in-out;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+.ourvalueable {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    background-image: url(/static/pics/themeui-purple-bg-c7356.jpg);
+    background-size: cover;
+}
+
+.ourvalueable img {
+    height: 75%;
+    width: 40%;
+    object-fit: contain;
+    position: absolute;
+    right: 5%;
+    top: 60%;
+    transform: translateY(-50%);
+}
+
+.ourvalueable .textarea {
+    position: absolute;
+    width: 40%;
+    height: 50%;
+    top: 60%;
+    left: 0%;
+    transform: translateY(-50%);
+}
+
+.ourvalueable .textarea h1 {
+    font-size: 2.5rem;
+}
+
+.ourvalueable .textarea p {
+    line-height: 1.5rem;
+    font-size: 1rem;
+    margin: 20px 0px;
+}
+
+.button {
+    padding: 10px 20px;
+    font-weight: bold;
+    color: white;
+    background: rgb(11, 116, 30);
+    border-radius: 5px;
+    font-size: 1.2rem;
+    transition: 0.5s all;
+}
+
+.button:hover {
+    padding-right: 50px;
+    filter: brightness(1.5);
+}
+
+
+/* image deck */
+.ourpartner{
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 2%;
+    background: rgb(235,235,244);
+    background: linear-gradient(90deg, rgba(235,235,244,1) 18%, rgba(226,243,246,1) 100%);
+}
+
+.imagedeck {
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 0%;
+    background: rgb(235,235,244);
+    background: linear-gradient(90deg, rgba(235,235,244,1) 18%, rgba(226,243,246,1) 100%);
+}
+
+.imagedeck img {
+    width: 20%;
+    height: 80%;
+    object-fit: contain;
+}
+
+
+/* partners */
+
+.partners {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 20px 0px;
+}
+
+#p1 {
+    animation-delay: 1s;
+}
+
+#p2 {
+    animation-delay: 2s;
+}
+
+#p3 {
+    animation-delay: 3s;
+}
+
+#p4 {
+    animation-delay: 4s;
+}
+
+.partners .img {
+    width: 40%;
+    height: 80%;
+    position: relative;
+    transition: 1s all ease-in-out;
+}
+
+.partners .img:hover {
+    animation: example2 ease-in-out;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+.partners .img img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.partners .text {
+    width: 40%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.partners .mobile-text {
+    display: none;
+}
+
+.partners .pc-text {
+    width: 40%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.partners h1 {
+    font-size: 2.5rem;
+}
+
+.partners p {
+    font-size: 1rem;
+}
+
+
+/* animations */
+
+@keyframes example {
+    0% {
+        transform: translateX(0%) translateY(-50%);
+    }
+    50% {
+        transform: translateX(10%) translateY(-50%);
+    }
+    100% {
+        transform: translateX(0%) translateY(-50%);
+    }
+}
+
+@keyframes example2 {
+    0% {
+        transform: translateY(0%) scale(1.1);
+    }
+    50% {
+        transform: translateY(10%) scale(1.1);
+    }
+    100% {
+        transform: translateY(0%) scale(1.1);
+    }
+}
+
+
+/* mobile version */
+
+@media only screen and (max-width: 520px) {
+    /* ourvalueable */
+    .circle {
+        width: 250px;
+        height: 250px;
+    }
+    .ourvalueable {
+        height: 100vh;
+        margin-bottom: 10%;
+    }
+    .ourvalueable img {
+        display: none;
+    }
+    .ourvalueable .textarea {
+        position: absolute;
+        width: 80%;
+        height: 50%;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .ourvalueable .textarea h1 {
+        font-size: 1.5rem;
+    }
+    .ourvalueable .textarea p {
+        line-height: 1.5rem;
+        font-size: 1rem;
+        margin: 30px 0px;
+    }
+    .button {
+        font-size: 3vw;
+    }
+    /*img deck*/
+    .ourpartner{
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 2%;
+        margin-top: -10%;
+        background: rgb(235,235,244);
+        background: linear-gradient(90deg, rgba(235,235,244,1) 18%, rgba(226,243,246,1) 100%);
+    }
+    .imagedeck {
+        margin: -20% 0%;
+        visibility: hidden;
+    }
+    /* partners */
+    .partners {
+        height: 100%;
+        width: 80%;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.1);
+        margin: 5% 10%;
+        border-radius: 10px;
+    }
+    .partners .img {
+        width: 80%;
+        height: 50%;
+        position: relative;
+    }
+    .partners .img img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+    .partners .mobile-text {
+        width: 80%;
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .partners .text {
+        width: 80%;
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .partners .pc-text {
+        display: none;
+    }
+    .partners h1 {
+        font-size: 2rem;
+    }
+    .partners p {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (min-width: 521px) and (max-width: 798px) {
+    .circle {
+        width: 250px;
+        height: 250px;
+    }
+    .ourvalueable {
+        height: 100vh;
+        margin-bottom: 10%;
+    }
+    .ourvalueable img {
+        display: none;
+    }
+    .ourvalueable .textarea {
+        position: absolute;
+        width: 80%;
+        height: 50%;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .ourvalueable .textarea h1 {
+        font-size: 2.5rem;
+    }
+    .ourvalueable .textarea p {
+        line-height: 4vw;
+        font-size: 3vw;
+        margin: 30px 0px;
+    }
+    .button {
+        font-size: 3vw;
+    }
+    /*img deck*/
+    .ourpartner{
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 2%;
+        margin-top: -10%;
+        background: rgb(235,235,244);
+        background: linear-gradient(90deg, rgba(235,235,244,1) 18%, rgba(226,243,246,1) 100%);
+    }
+    .imagedeck {
+        visibility: hidden;
+        width: auto;
+        height: auto;
+    }
+    /* partners */
+    .partners {
+        height: 100%;
+        width: 80%;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.1);
+        margin: 5% 10%;
+        border-radius: 10px;
+    }
+    .partners .img {
+        width: 80%;
+        height: 50%;
+        position: relative;
+    }
+    .partners .img img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+    .partners .mobile-text {
+        width: 80%;
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .partners .text {
+        width: 80%;
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .partners .pc-text {
+        display: none;
+    }
+    .partners h1 {
+        font-size: 2rem;
+    }
+    .partners p {
+        font-size: 1rem;
+    }
 }
