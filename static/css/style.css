@@ -1,4 +1,3 @@
-{% load static %}
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
 
 *{
@@ -73,8 +72,6 @@ a{
 .menuitems a:hover{
     color: cornflowerblue;
 }
-
-/* find job row */
 
 .findjob{
     width: 100%;
@@ -189,8 +186,6 @@ a{
     opacity: 1;
     transform: translateX(10px);
 }
-
-/* what we do*/
 
 .whatwedo{
     height: 100vh;
@@ -353,8 +348,6 @@ a{
     font-weight: bolder;
 }
 
-/* hot listing */
-
 .hotlisting{
     height: 100vh;
     width: 100%;
@@ -431,8 +424,6 @@ a{
     opacity: 1;
 }
 
-/*success*/
-
 .success{
     height: 120vh;
     width:100%;    
@@ -479,8 +470,6 @@ a{
     opacity: 1;
 }
 
-
-
 .success .sliderdeck{    
     display: flex;
     align-items: center;
@@ -523,7 +512,6 @@ a{
 
 }
 
-/*trending*/
 .trending{
     height: 120vh;
     width:100%;    
@@ -597,10 +585,8 @@ a{
     align-self: center;
 }
 
-/* mobile vertion */
 
 @media only screen and (max-width: 798px) {
-    /* navigation bar*/
         *{
             min-width: 0;
             margin: 0;
@@ -615,11 +601,6 @@ a{
             position: absolute;
             top: 0;
             left: 0;
-        }
-
-        #shopingcart{
-            align-self: flex-start;
-            margin-top: 0px;
         }
 
         .hamburger{
@@ -662,8 +643,6 @@ a{
             display: none;
         }
 
-        /* find job row */
-
         .buttondeck{
             widows: 100%;
         }
@@ -682,8 +661,6 @@ a{
         .bigtxt{
             font-size:3rem;    
         }
-
-        /* what we do*/
 
         .whatwedo{            
             flex-direction: column;
@@ -716,8 +693,6 @@ a{
             width:100%;
             height:250px;
         }
-
-        /* we build */
         .webuild{
             height: auto;            
             widows: 100vw;
@@ -758,7 +733,6 @@ a{
         .webuild .foottext{
             transform: translateY(2px);
         }
-        /* hot listing */
 
         .hotlisting{
             flex-direction: column;
@@ -792,7 +766,6 @@ a{
             align-self: center;
         }
 
-        /*success*/
         .success{
             height: 150vh;
             justify-content: space-around;
@@ -819,7 +792,6 @@ a{
         .success .indent{
             transform: translateX(-2%);
         }
-        /*trending*/
         .trending{
             height:auto ;
             width:  100%;   
@@ -849,9 +821,6 @@ a{
             font-size: 2.5rem;
         }
 }
-
-
-/* ourvalueable */
 
 .circle {
     position: absolute;
@@ -920,8 +889,6 @@ a{
     filter: brightness(1.5);
 }
 
-
-/* image deck */
 .ourpartner{
     font-size: 1.5rem;
     text-align: center;
@@ -946,9 +913,6 @@ a{
     height: 80%;
     object-fit: contain;
 }
-
-
-/* partners */
 
 .partners {
     width: 100%;
@@ -1024,9 +988,6 @@ a{
     font-size: 1rem;
 }
 
-
-/* animations */
-
 @keyframes example {
     0% {
         transform: translateX(0%) translateY(-50%);
@@ -1051,11 +1012,7 @@ a{
     }
 }
 
-
-/* mobile version */
-
 @media only screen and (max-width: 520px) {
-    /* ourvalueable */
     .circle {
         width: 250px;
         height: 250px;
@@ -1086,7 +1043,6 @@ a{
     .button {
         font-size: 3vw;
     }
-    /*img deck*/
     .ourpartner{
         font-size: 1.5rem;
         text-align: center;
@@ -1099,7 +1055,6 @@ a{
         margin: -20% 0%;
         visibility: hidden;
     }
-    /* partners */
     .partners {
         height: 100%;
         width: 80%;
@@ -1176,7 +1131,6 @@ a{
     .button {
         font-size: 3vw;
     }
-    /*img deck*/
     .ourpartner{
         font-size: 1.5rem;
         text-align: center;
@@ -1190,7 +1144,6 @@ a{
         width: auto;
         height: auto;
     }
-    /* partners */
     .partners {
         height: 100%;
         width: 80%;
