@@ -3,7 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 from django.db.models import Q
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from thinkgroupy import settings
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -274,9 +277,11 @@ def EmailUpdate(request):
         email_for_activation = request.POST['email']
         token = secrets.randbits(16)
         mail_subject = 'Confirm your Mail'
-        email = EmailMessage(
-            mail_subject, f'Hello{user} here is your otp {token}', to=[email_for_activation]
-        )
+        html_content = render_to_string("dashboard/emailupdate.html",
+                                        {'otp': token})
+        text_content = strip_tags(html_content)
+        email = EmailMultiAlternatives(mail_subject, text_content, settings.EMAIL_HOST_USER, [email_for_activation])
+        email.attach_alternative(html_content, "text/html")
         email.send()
         obj = PrimaryEmail.objects.filter(user=request.user)
         if obj:
@@ -433,3 +438,4 @@ def billing(request):
                    "verified": verified,
                    "budget": budget,
                    "refund": refund})
+
