@@ -9,6 +9,10 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.utils.html import strip_tags
+from thinkgroupy import settings
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 UserModel = get_user_model()
@@ -38,16 +42,17 @@ def signup(request):
                 user.save()
                 current_site = get_current_site(request)
                 mail_subject = 'Activate your account.'
-                message = render_to_string('accounts/activation_mail.html', {
+                to_email = form.cleaned_data.get('email')
+                html_content = render_to_string('accounts/activation_mail.html', {
                     'user': user,
                     'domain': current_site.domain,
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'token': default_token_generator.make_token(user),
                 })
-                to_email = form.cleaned_data.get('email')
-                email = EmailMessage(
-                    mail_subject, message, to=[to_email]
-                )
+                text_content = strip_tags(html_content)
+        
+                email = EmailMultiAlternatives(mail_subject, text_content, settings.EMAIL_HOST_USER, [to_email])
+                email.attach_alternative(html_content, "text/html")
                 email.send()
                 return redirect('accounts:confirm_your_account')
             else:
@@ -57,6 +62,7 @@ def signup(request):
         else:
             form = SignUpForm()
             return render(request, 'accounts/signup.html', {'form': form})
+
 
 
 def activate(request, uidb64, token):
