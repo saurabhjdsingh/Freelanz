@@ -7,9 +7,7 @@ from .forms import SignUpForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
 from thinkgroupy import settings
@@ -74,6 +72,12 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
+        to_email = user.email
+        html_content = render_to_string('accounts/welcome_email.html')
+        text_content = strip_tags(html_content)
+        email = EmailMultiAlternatives('Welcome To Thinkgroupy', text_content, settings.EMAIL_HOST_USER, [to_email])
+        email.attach_alternative(html_content, "text/html")
+        email.send()
         return redirect('accounts:account_activated')
     else:
         return redirect('accounts:account_activated_false')
