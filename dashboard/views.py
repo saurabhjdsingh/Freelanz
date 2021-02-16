@@ -277,7 +277,7 @@ def EmailUpdate(request):
         email_for_activation = request.POST['email']
         token = secrets.randbits(16)
         mail_subject = 'Confirm your Mail'
-        html_content = render_to_string("dashboard/emailupdate.html",
+        html_content = render_to_string("dashboard/confirm_mail.html",
                                         {'otp': token})
         text_content = strip_tags(html_content)
         email = EmailMultiAlternatives(mail_subject, text_content, settings.EMAIL_HOST_USER, [email_for_activation])
