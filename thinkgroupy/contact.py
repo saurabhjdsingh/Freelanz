@@ -1,7 +1,10 @@
 from django import forms
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.core.mail import send_mail, get_connection
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
+from django.utils.html import strip_tags
+from thinkgroupy import settings
 
 
 class ContactForm(forms.Form):
@@ -17,14 +20,20 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            con = get_connection('django.core.mail.backends.console.EmailBackend')
-            send_mail(
-                cd['subject'],
-                cd['message'],
-                cd.get('email',),
-                ['singhjdsaurabh@gmail.com'],
-                connection=con
-             )
+            html_content = render_to_string('contact_email.html', {
+                'name': cd['name'],
+                'subject': cd['subject'],
+                'message': cd['message'],
+                'from_email': cd['email']
+            })
+            text_content = strip_tags(html_content)
+            email = EmailMultiAlternatives(
+                'Message From Thinkgroupy',
+                text_content,
+                settings.EMAIL_HOST_USER,
+                ['singhjdsaurabh@gmail.com'])
+            email.attach_alternative(html_content, "text/html")
+            email.send()
             return HttpResponseRedirect('/contact?submitted=True')
     else:
         form = ContactForm()
@@ -33,3 +42,4 @@ def contact(request):
 
     return render(request, 'contact.html',
                   {'form': form, 'submitted': submitted})
+
