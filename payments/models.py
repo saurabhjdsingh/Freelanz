@@ -1,6 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
 from projects.models import CompletedOrder
+from dashboard.models import Profile
+
+
+class Payment(models.Model):
+    profile = models.ForeignKey(to=Profile, on_delete=models.CASCADE)
+    payment_amount = models.CharField(max_length=200, null=True, blank=True)
+    payment_date = models.DateTimeField(null=True, blank=True)
+    payment_id = models.CharField(max_length=200, null=True, blank=True, unique=True)
+    email = models.CharField(max_length=200, null=True, blank=True)
+    phone_number = models.CharField(max_length=17, blank=True, null=True)
+    captured = models.BooleanField(default=False)
+    
+    
+    def __str__(self):
+        return self.profile.user.username
 
 
 class Refund(models.Model):
