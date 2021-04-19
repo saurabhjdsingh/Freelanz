@@ -8,7 +8,8 @@ from projects.models import Order, Project, Bid
 from chat.models import Notify
 import requests
 from django.contrib import messages
-client = razorpay.Client(auth=("rzp_live_Zf4TbkIUdXTAUP", "1jyy1EBkzTqXlfQJLXLDOHtZ"))
+from decouple import config
+client = razorpay.Client(auth=(config("RAZORPAY_KEY"), config("RAZORPAY_SECRET")))
 
 
 @login_required
@@ -71,10 +72,7 @@ def processwithdrawal(request):
             'content-type': 'application/json',
         }
         data = {"account": account_id, "amount": amount, "currency": "INR"}
-        response = requests.post('https://api.razorpay.com/v1/transfers', headers=headers, json=data, auth=('rzp_live_Zf4TbkIUdXTAUP', '1jyy1EBkzTqXlfQJLXLDOHtZ'))
+        response = requests.post('https://api.razorpay.com/v1/transfers', headers=headers, json=data, auth=(config("RAZORPAY_KEY"), config("RAZORPAY_SECRET")))
         VirtualCurrency.objects.filter(user=request.user).update(budget=0)
         messages.success(request, 'We have transferred the money to your account.')
     return render(request, "dashboard/billing.html")
-
-
-
