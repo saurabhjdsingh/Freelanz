@@ -11,7 +11,8 @@ from asgiref.sync import async_to_sync
 from projects.models import Project, Bid, Order, CompletedOrder
 from payments.models import VirtualCurrency, Tempwallet, Refund
 import razorpay
-client = razorpay.Client(auth=("rzp_live_Zf4TbkIUdXTAUP", "1jyy1EBkzTqXlfQJLXLDOHtZ"))
+from decouple import config
+client = razorpay.Client(auth=(config("RAZORPAY_KEY"), config("RAZORPAY_SECRET")))
 
 
 @login_required
