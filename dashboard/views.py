@@ -30,6 +30,7 @@ import base64
 import matplotlib
 import matplotlib.pyplot as xyz
 from io import BytesIO
+from decouple import config
 matplotlib.use('Agg')
 UserModel = get_user_model()
 
@@ -319,8 +320,8 @@ def PhoneUpdate(request):
         if form.is_valid():
             phone = form.cleaned_data['phone']
             token = secrets.randbits(16)
-            account_sid = 'AC929d62e1173b1d610a76aa7aa14f9acc'
-            auth_token = '840c3797d4ccac0a7c6ec57f6dd2034c'
+            account_sid = config('account_sid')
+            auth_token = config('auth_token')
             client = Client(account_sid, auth_token)
             body_message = 'Hey! Thanks for making an account on thinkgroupy.com , Your O.T.P for phone Verification is: ' + str(token)
             client.messages.create(
@@ -380,7 +381,7 @@ def billing(request):
     else:
         obje = Refund(user=user)
         obje.save()
-        
+
     refund = Refund.objects.get(user=request.user)
     if request.method == "POST":
         name = request.POST.get('user_name')
@@ -438,4 +439,3 @@ def billing(request):
                    "verified": verified,
                    "budget": budget,
                    "refund": refund})
-
