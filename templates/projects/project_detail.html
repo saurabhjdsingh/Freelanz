@@ -46,6 +46,18 @@
                     {% endif %}
                 </span>
                 <h6>by - <span><a href="/profile/{{project.created_by.id}}">{{project.created_by}}</a></span></h6>
+                {% if project.created_by == request.user %}
+                <p class="card-title">Send Email to all users?
+                {% if email.number_of_emails >= 1 %}
+                    <form method="POST" action="/projects/my">
+                    {% csrf_token %}
+                    <button type="submit" class="submit-button bg-gradient-primary-to-secondary btn-rounded" style="color:white;" >Send Emails <i class="fas fa-envelope-open-text"></i></button>
+                    </form>
+                {% else %}
+                    <a href="/projects/buy_emails" data-toggle="tooltip" data-placement="top" title="" data-original-title="We will send an email regarding this project to our users, so that they can apply for it and you can hire someone faster."> Know More</a>
+                {% endif %}    
+                </p>
+                {% endif %}
             </div>
         </div>
     </div>
