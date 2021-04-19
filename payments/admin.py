@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
-from .models import VirtualCurrency, Tempwallet, AccountDetails, Refund
+from .models import VirtualCurrency, Tempwallet, AccountDetails, Refund, Payment
 
 
 class VirtualCurrencyAdmin(ModelAdmin):
@@ -37,3 +37,9 @@ class AccountDetailscAdmin(ModelAdmin):
 
 admin.site.register(AccountDetails, AccountDetailscAdmin)
 
+class PaymentAdmin(ModelAdmin):
+    list_display = ["profile", "payment_amount"]
+    search_fields = ["profile__user__username", "payment_id", "payment_amount", "email", "phone_number"]
+    list_filter = ["payment_amount"]
+
+admin.site.register(Payment, PaymentAdmin)
