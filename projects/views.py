@@ -10,8 +10,9 @@ from django.contrib.auth import get_user_model
 from datetime import datetime, timedelta
 from django.utils import timezone
 from twilio.rest import Client
+from decouple import config
 User = get_user_model()
-client = razorpay.Client(auth=("rzp_test_KYvzf3gTa77slK", "ORoQsCuqYR8VzRRVPoWwJmXv"))
+client = razorpay.Client(auth=(config("RAZORPAY_KEY"), config("RAZORPAY_SECRET")))
 
 
 @login_required
@@ -130,8 +131,8 @@ def Myprojects(request):
             e.save()
             t = EmailRequest(profile=request.user.profile, number_of_emails= number_of_emails, expiry_date= timezone.now() + timedelta(1))
             t.save()
-            account_sid = 'AC929d62e1173b1d610a76aa7aa14f9acc'
-            auth_token = '840c3797d4ccac0a7c6ec57f6dd2034c'
+            account_sid = config('account_sid')
+            auth_token = config('auth_token')
             number = request.user.userphone.phone
             client = Client(account_sid, auth_token)
             body_message = 'Thanks! We are processing your order and we will send your project details to our users through mail.'
@@ -216,4 +217,4 @@ def buy_emails(request):
                 email = EmailSubscription(profile = profile, email_type = 'large', number_of_emails = int(10))
                 email.save()
         return redirect('projects:my_project')
-    return render(request, "projects/buy_emails.html", {"key":"rzp_test_KYvzf3gTa77slK"})
+    return render(request, "projects/buy_emails.html", {"key": config("RAZORPAY_KEY")})
