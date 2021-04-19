@@ -1,0 +1,140 @@
+{% extends "accounts/login_base.html" %}
+{% block head %}<title>Thinkgroupy | Buy Emails</title>{% endblock head %}
+{% load static %}
+ 
+{% block body_block %}
+<script src="https://kit.fontawesome.com/123b61bd66.js" crossorigin="anonymous"></script>
+
+<div class="container" style="background-color: white;
+padding: 5%; margin-top: 89px;">
+                        <div class="text-center mb-5">
+                            <div class="display-4 text-primary mb-2">Compare our pricing plans</div>
+                            <div class="display-4">Pick what's right for you</div>
+                        </div>
+                        <div class="card mb-5">
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <thead>
+                                            <tr class="bg-dark text-white">
+                                                <th class="py-4" scope="col"></th>
+                                                <th class="py-4" scope="col">Small</th>
+                                                <th class="py-4" scope="col">Medium</th>
+                                                <th class="py-4" scope="col">Large</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Price per email bundle <a data-toggle="tooltip" data-placement="right" data-original-title="A bundle means a single package that will be send to particular number of users through email.">?</a></th>
+                                                <td>$0.9</td>
+                                                <td>$9.9</td>
+                                                <td>$19.9</td>
+                                            </tr>
+                                            <tr class="bg-gray-100">
+                                                <th scope="row">No. of users <a data-toggle="tooltip" data-placement="right" data-original-title="Total number of particular users that will recieve your featured email.">?</a></th>
+                                                <td>100</td>
+                                                <td>250</td>
+                                                <td>450</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Email Bundle <a data-toggle="tooltip" data-placement="right" data-original-title="Total number of email bundle that you will recieve or in simple words total number of times you can send email to the users of this website.">?</a></th>
+                                                <td>1</td>
+                                                <td>5</td>
+                                                <td>10</td>
+                                                </tr>
+                                            <tr class="bg-gray-100">
+                                                <th scope="row">Premium assets <a data-toggle="tooltip" data-placement="right" data-original-title="We will use our premium email templates to make sure that most of them apply for your project.">?</a></th>
+                                                <td><i class="fas fa-check text-green"></i></td>
+                                                <td><i class="fas fa-check text-green"></i></td>
+                                                <td><i class="fas fa-check text-green"></i></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Customer support</th>
+                                                <td>Chat only</td>
+                                                <td>Chat &amp; phone</td>
+                                                <td>Dedicated email specialist</td>
+                                            </tr>
+                                            <tr class="bg-gray-100">
+                                                <th scope="row">Buy Now</th>
+                                                <td>
+                                                    {% if user.is_authenticated %}
+         <button>
+            <form method="POST">
+             {% csrf_token %}
+             <input type="text" name="amount" value="small" style="display:none" />
+             <script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="{{key}}"
+    data-amount="90"
+    data-currency="USD"
+    data-name="Thinkgroupy"
+    data-description="Pay & Send the emails."
+    data-prefill.name="{{user.first_name}}"
+    data-prefill.email="{{user.email}}"
+    data-prefill.contact="{{user.userphone.phone}}"
+></script>
+             <input type="hidden" custom="Hidden Element" name="hidden">
+         </form>
+         </button>
+         {% else %}
+         <a class="price-button price-button-purple pop" href="/signin?next=/buy_emails">Get started <i class="fa fa-arrow-right"></i></a>
+         {% endif %}
+                                                    
+                                                    
+                                                </td>
+                                                <td>
+                                                    {% if user.is_authenticated %}
+         <button>
+            <form method="POST">
+             {% csrf_token %}
+             <input type="text" name="amount" value="medium" style="display:none" />
+             <script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="{{key}}"
+    data-amount="990"
+    data-currency="USD"
+    data-name="Thinkgroupy"
+    data-description="Pay & Send the emails."
+    data-prefill.name="{{user.first_name}}"
+    data-prefill.email="{{user.email}}"
+    data-prefill.contact="{{user.userphone.phone}}"
+></script>
+             <input type="hidden" custom="Hidden Element" name="hidden">
+         </form>
+         </button>
+         {% else %}
+         <a class="price-button price-button-purple pop" href="/signin?next=/buy_emails">Get started <i class="fa fa-arrow-right"></i></a>
+         {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if user.is_authenticated %}
+         <button>
+            <form method="POST">
+             {% csrf_token %}
+             <input type="text" name="amount" value="large" style="display:none" />
+             <script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="{{key}}"
+    data-amount="1990"
+    data-currency="USD"
+    data-name="Thinkgroupy"
+    data-description="Pay & Send the emails."
+    data-prefill.name="{{user.first_name}}"
+    data-prefill.email="{{user.email}}"
+    data-prefill.contact="{{user.userphone.phone}}"
+></script>
+             <input type="hidden" custom="Hidden Element" name="hidden">
+         </form>
+         </button>
+         {% else %}
+         <a class="price-button price-button-purple pop" href="/signin?next=/buy_emails">Get started <i class="fa fa-arrow-right"></i></a>
+         {% endif %}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}
