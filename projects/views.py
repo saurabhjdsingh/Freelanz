@@ -1,8 +1,17 @@
 from .forms import CreateProjectForm, CreateBidForm
-from . models import Project, Bid, categories, Order, CompletedOrder
+from . models import Project, Bid, categories, Order, CompletedOrder, EmailSubscription, EmailRequest
 from django.shortcuts import HttpResponseRedirect, render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from dashboard.models import Profile, UserPhone
+from payments.models import Payment
+from django.utils import timezone
+import razorpay
+from django.contrib.auth import get_user_model
+from datetime import datetime, timedelta
+from django.utils import timezone
+from twilio.rest import Client
+User = get_user_model()
+client = razorpay.Client(auth=("rzp_test_KYvzf3gTa77slK", "ORoQsCuqYR8VzRRVPoWwJmXv"))
 
 
 @login_required
@@ -27,11 +36,18 @@ def category(request):
 @login_required
 def Slug_Project(request, slug):
     projects = get_object_or_404(Project, slug=slug)
-    if Bid.objects.filter(project=projects, created_by=request.user).exists():
-        bids = Bid.objects.filter(project=projects, created_by=request.user)
-        return render(request, "projects/project_detail.html", {"project": get_object_or_404(Project, slug=slug), "applied": bids})
+    if EmailSubscription.objects.filter(profile=request.user.profile).exists():
+        email = EmailSubscription.objects.get(profile=request.user.profile)
+        if Bid.objects.filter(project=projects, created_by=request.user).exists():
+            bids = Bid.objects.filter(project=projects, created_by=request.user)
+            return render(request, "projects/project_detail.html", {"project": get_object_or_404(Project, slug=slug), 'email': email,"applied": bids})
+        return render(request, "projects/project_detail.html", {"project": get_object_or_404(Project, slug=slug),'email': email})
     else:
-        return render(request, "projects/project_detail.html", {"project": get_object_or_404(Project, slug=slug)})
+        if Bid.objects.filter(project=projects, created_by=request.user).exists():
+            bids = Bid.objects.filter(project=projects, created_by=request.user)
+            return render(request, "projects/project_detail.html", {"project": get_object_or_404(Project, slug=slug), "applied": bids})
+        else:
+            return render(request, "projects/project_detail.html", {"project": get_object_or_404(Project, slug=slug)})
 
 
 @login_required
@@ -47,7 +63,6 @@ def CreateProject(request):
     profile = Profile.objects.get(user__id=request.user.id)
     user = request.user
     if request.method == 'POST':
-        print('yes')
         form = CreateProjectForm(request.POST, request.FILES)
         if form.is_valid():
             if request.FILES:
@@ -92,7 +107,50 @@ def BidProject(request, project):
 @login_required
 def Myprojects(request):
     projects = Project.objects.filter(created_by=request.user)
-    return render(request, "projects/myprojects.html", {'projects': projects})
+    if EmailSubscription.objects.filter(profile=request.user.profile).exists():
+        email = EmailSubscription.objects.get(profile=request.user.profile)
+        if request.method == "POST":
+            emails = []
+            users = User.objects.all()
+            for user in users:
+                email = user.email
+                emails.append(email)
+            e = EmailSubscription.objects.get(profile=request.user.profile)
+            if e.email_type == "small":
+                email_list = emails[:100]
+                number_of_emails = int(100)
+            if e.email_type == "medium":
+                email_list = emails[:250]
+                number_of_emails = int(250)
+            if e.email_type == "large":
+                email_list = emails[:450]
+                number_of_emails = int(450)
+            e.number_of_emails = int(e.number_of_emails - 1 )
+            e.no_of_emails_send = int(e.no_of_emails_send + 1)
+            e.save()
+            t = EmailRequest(profile=request.user.profile, number_of_emails= number_of_emails, expiry_date= timezone.now() + timedelta(1))
+            t.save()
+            account_sid = 'AC929d62e1173b1d610a76aa7aa14f9acc'
+            auth_token = '840c3797d4ccac0a7c6ec57f6dd2034c'
+            number = request.user.userphone.phone
+            client = Client(account_sid, auth_token)
+            body_message = 'Thanks! We are processing your order and we will send your project details to our users through mail.'
+            client.messages.create(
+                              body=body_message,
+                              from_='+18444458559',
+                              to=str(number)
+                          )
+            messages = "One email request order has been placed on your website thinkgroupy.com , make sure you check it out."
+            client.messages.create(
+                              body=messages,
+                              from_='+18444458559',
+                              to='+919456052343'
+                          )
+            return redirect("dashboard:dashboard")
+        else:
+            return render(request, "projects/myprojects.html", {'projects': projects, 'email': email})
+    else:
+        return render(request, "projects/myprojects.html", {'projects': projects})
 
 
 @login_required
@@ -104,3 +162,58 @@ def Applicants(request, project):
     else:
         return redirect("dashboard:dashboard")
 
+def buy_emails(request):
+    if request.method == "POST":
+        if request.POST['amount'] == "small":
+            amount = float(0.9)
+        elif request.POST['amount'] == "medium":
+            amount = float(9.9)
+        elif request.POST['amount'] == "large":
+            amount = float(19.90)
+        else:
+            amount = int(0)
+        payment_id = request.POST.get('razorpay_payment_id')
+        payment_amount = amount*100
+        pay = client.payment.fetch(payment_id)
+        pay_email = pay.get('email')
+        pay_contact = pay.get('contact')
+        profile = Profile.objects.filter(user=request.user).first()
+        if amount == 19.9:
+            cost = 1990
+            client.payment.capture(payment_id, cost, {"currency": "USD"})
+        else:
+            client.payment.capture(payment_id, payment_amount, {"currency": "USD"})
+        pay = Payment(profile=profile, payment_amount=payment_amount, payment_date=timezone.now(), payment_id=payment_id, email=pay_email, phone_number=pay_contact, captured=pay.get('captured'))
+        pay.save()
+        if amount == 0.9:
+            if EmailSubscription.objects.filter(profile=request.user.profile).exists():
+                email = EmailSubscription.objects.get(profile=request.user.profile)
+                email.profile = profile
+                email.email_type = 'small'
+                email.number_of_emails = int(email.number_of_emails + 1)
+                email.save()
+            else:
+                email = EmailSubscription(profile = profile, email_type = 'small', number_of_emails = int(1))
+                email.save()
+        elif amount == 9.9:
+            if EmailSubscription.objects.filter(profile=request.user.profile).exists():
+                email = EmailSubscription.objects.get(profile=request.user.profile)
+                email.profile = profile
+                email.email_type = 'medium'
+                email.number_of_emails = int(email.number_of_emails + 5)
+                email.save()
+            else:
+                email = EmailSubscription(profile = profile, email_type = 'medium', number_of_emails = int(5))
+                email.save()
+        elif amount == 19.9:
+            if EmailSubscription.objects.filter(profile=request.user.profile).exists():
+                email = EmailSubscription.objects.get(profile=request.user.profile)
+                email.profile = profile
+                email.email_type = 'large'
+                email.number_of_emails = int(email.number_of_emails + 10)
+                email.save()
+            else:
+                email = EmailSubscription(profile = profile, email_type = 'large', number_of_emails = int(10))
+                email.save()
+        return redirect('projects:my_project')
+    return render(request, "projects/buy_emails.html", {"key":"rzp_test_KYvzf3gTa77slK"})
