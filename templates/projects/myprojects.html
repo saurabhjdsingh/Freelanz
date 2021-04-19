@@ -32,6 +32,16 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{i.name}}</h5>
+                            <p class="card-title">Send Email to all users?
+                                {% if email.number_of_emails >= 1 %}
+                                    <form method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="submit-button bg-gradient-primary-to-secondary btn-rounded" style="color:white;" >Send Emails <i class="fas fa-envelope-open-text"></i></button>
+                                    </form>
+                                {% else %}
+                                    <a href="/projects/buy_emails" data-toggle="tooltip" data-placement="top" title="" data-original-title="We will send an email regarding this project to our users, so that they can apply for it and you can hire someone faster."> Know More</a>
+                                {% endif %}
+                            </p>
                             <a href="/projects/project/{{i.slug}}">Read More</a>
                             <a class="btn bg-gradient-primary-to-secondary btn-md btn-rounded" style="color:white; float:right;" href="/projects/bids/{{i.slug}}">Applicants</a>
                         </div>
