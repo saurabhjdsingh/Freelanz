@@ -319,27 +319,15 @@ def PhoneUpdate(request):
         form = PhoneUpdateForm(request.POST)
         if form.is_valid():
             phone = form.cleaned_data['phone']
-            token = secrets.randbits(16)
             account_sid = config('account_sid')
             auth_token = config('auth_token')
+            twilio_verify_services = config('twilio_verify_services')
             client = Client(account_sid, auth_token)
-            body_message = 'Hey! Thanks for making an account on thinkgroupy.com , Your O.T.P for phone Verification is: ' + str(token)
-            client.messages.create(
-                              body=body_message,
-                              from_='+18444458559',
-                              to=str(phone)
-                          )
-            obj = UserPhone.objects.filter(user=request.user)
-            if obj:
-                for i in obj:
-                    i.phone = phone
-                    i.token = token
-                    i.created_on = timezone.now()
-                    i.save()
-            else:
-                new = UserPhone(user=request.user, token=token)
-                new.save()
-                messages.error(request, 'Please verify with your O.T.P.')
+            verification = client.verify \
+                     .services(twilio_verify_services) \
+                     .verifications \
+                     .create(to=str(phone), channel='sms')
+            messages.error(request, 'Please verify with your O.T.P.')
             request.session['phone'] = str(phone)
             return redirect('dashboard:otp_phone_verify', phone=str(phone))
         else:
@@ -349,18 +337,32 @@ def PhoneUpdate(request):
 
 @login_required
 def otp_phone_verify(request, phone):
-    primarynumber = get_object_or_404(UserPhone, user=request.user)
     if request.method == "POST":
         code = request.POST['otp']
-        if primarynumber.errors < 3 and code == primarynumber.token and timezone.now() - primarynumber.created_on < timedelta(minutes=3):
-            x = UserPhone.objects.filter(user=request.user)
-            for i in x:
-                i.phone = request.session['phone']
-                i.verified = True
-                i.save()
+        account_sid = config('account_sid')
+        auth_token = config('auth_token')
+        client = Client(account_sid, auth_token)
+        verification_check = client.verify \
+                           .services('VAd0aaf4cde1c29710caf986f0b417e0ce') \
+                           .verification_checks \
+                           .create(to=request.session['phone'], code=code)
+        if verification_check.status == 'approved':
+            if UserPhone.objects.filter(user=request.user).exists():
+                x = UserPhone.objects.filter(user=request.user)
+                for i in x:
+                    i.phone = request.session['phone']
+                    i.token = code
+                    i.verified = True
+                    i.save()
+                    request.session.pop('phone')
+                    messages.success(request, 'Your number is successfully verified.')
+                return redirect("dashboard:security")
+            else:
+                new = UserPhone(user=request.user, phone=request.session['phone'], token=code, verified=True)
+                new.save()
                 request.session.pop('phone')
                 messages.success(request, 'Your number is successfully verified.')
-            return redirect("dashboard:security")
+                return redirect("dashboard:security")
         else:
             request.session.pop('phone')
             messages.error(request, 'We are unable to verify your account, try again.')
