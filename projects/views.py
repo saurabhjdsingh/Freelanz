@@ -11,6 +11,10 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from twilio.rest import Client
 from decouple import config
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
+from django.utils.html import strip_tags
+from thinkgroupy import settings
 User = get_user_model()
 client = razorpay.Client(auth=(config("RAZORPAY_KEY"), config("RAZORPAY_SECRET")))
 
@@ -111,6 +115,8 @@ def Myprojects(request):
     if EmailSubscription.objects.filter(profile=request.user.profile).exists():
         email = EmailSubscription.objects.get(profile=request.user.profile)
         if request.method == "POST":
+            project_name = request.POST.get("slug")
+            request_project = Project.objects.get(name=project_name)
             emails = []
             users = User.objects.all()
             for user in users:
@@ -126,26 +132,28 @@ def Myprojects(request):
             if e.email_type == "large":
                 email_list = emails[:450]
                 number_of_emails = int(450)
+            for to_email in email_list:
+                email_to = to_email
+                user1 = User.objects.get(email=email_to)
+                html_content = render_to_string('emails/projects/send_project.html', {'user': user1.username, 'project': request_project})
+                text_content = strip_tags(html_content)
+                email = EmailMultiAlternatives('Project Invitation', text_content, settings.EMAIL_HOST_USER, [email_to])
+                email.attach_alternative(html_content, "text/html")
+                email.send()
             e.number_of_emails = int(e.number_of_emails - 1 )
             e.no_of_emails_send = int(e.no_of_emails_send + 1)
             e.save()
-            t = EmailRequest(profile=request.user.profile, number_of_emails= number_of_emails, expiry_date= timezone.now() + timedelta(1))
+            t = EmailRequest(profile=request.user.profile, number_of_emails= number_of_emails, completed=True, expiry_date= timezone.now() + timedelta(1))
             t.save()
             account_sid = config('account_sid')
             auth_token = config('auth_token')
             number = request.user.userphone.phone
             client = Client(account_sid, auth_token)
-            body_message = 'Thanks! We are processing your order and we will send your project details to our users through mail.'
-            client.messages.create(
-                              body=body_message,
-                              from_='+18444458559',
-                              to=str(number)
-                          )
-            messages = "One email request order has been placed on your website thinkgroupy.com , make sure you check it out."
+            messages = "Hey! We have processed your email request and also we have send your project details to our users through mail."
             client.messages.create(
                               body=messages,
                               from_='+18444458559',
-                              to='+919456052343'
+                              to=str(number)
                           )
             return redirect("dashboard:dashboard")
         else:
