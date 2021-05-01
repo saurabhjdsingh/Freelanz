@@ -75,6 +75,12 @@ def CreateProject(request):
             else:
                 obj = Project(name=form.cleaned_data['name'], budget=form.cleaned_data['budget'], created_by=user, end_date=form.cleaned_data['end_date'], category=form.cleaned_data['category'], description=form.cleaned_data['description'])
             obj.save()
+            request_project = Project.objects.get(name=obj.name)
+            html_content = render_to_string('emails/projects/project_live.html', {'project': request_project})
+            text_content = strip_tags(html_content)
+            email = EmailMultiAlternatives('Project Live', text_content, settings.EMAIL_HOST_USER, [request.user.email])
+            email.attach_alternative(html_content, "text/html")
+            email.send()
         return HttpResponseRedirect("/projects/")
     else:
         if profile.completed is True and UserPhone.objects.filter(user=request.user).exists():
@@ -97,8 +103,13 @@ def BidProject(request, project):
     if request.method == 'POST':
         form = CreateBidForm(request.POST)
         if form.is_valid():
-            obj = Bid(project=get_object_or_404(Project, slug=project), budget=form.cleaned_data['budget'], created_by=user, date_time=form.cleaned_data['date_time'], description=form.cleaned_data['description'])
+            obj = Bid(project=Project.objects.get(slug=project), budget=form.cleaned_data['budget'], created_by=user, date_time=form.cleaned_data['date_time'], description=form.cleaned_data['description'])
             obj.save()
+            html_content = render_to_string('emails/projects/application_recieved.html', {'user': request.user, 'message': form.cleaned_data['description']})
+            text_content = strip_tags(html_content)
+            email = EmailMultiAlternatives('Applicantion recieved for your project', text_content, settings.EMAIL_HOST_USER, [Project.objects.get(slug=project).created_by.email])
+            email.attach_alternative(html_content, "text/html")
+            email.send()
             return redirect("/projects/")
         return redirect("/projects/")
     else:
