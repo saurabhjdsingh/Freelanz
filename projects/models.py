@@ -52,7 +52,7 @@ class Bid(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     budget = models.FloatField(default=0)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.TextField(max_length=255, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
     date_time = models.DateField()
 
     def __str__(self):
