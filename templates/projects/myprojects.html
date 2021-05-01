@@ -36,6 +36,7 @@
                                 {% if email.number_of_emails >= 1 %}
                                     <form method="POST">
                                     {% csrf_token %}
+                                    <input type="text" name="slug" value="{{i.name}}" hidden />
                                     <button type="submit" class="submit-button bg-gradient-primary-to-secondary btn-rounded" style="color:white;" >Send Emails <i class="fas fa-envelope-open-text"></i></button>
                                     </form>
                                 {% else %}
