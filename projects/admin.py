@@ -4,22 +4,22 @@ from .models import Project, Bid, categories, Order, CompletedOrder, EmailSubscr
 
 class OrderAdmin(ModelAdmin):
     list_display = ["creator", "worker", "bid"]
-    search_fields = ["creator", "worker", "bid"]
+    search_fields = ["creator__username", "worker__username", "bid__project__name"]
     list_filter = ["creator", "worker", "bid"]
 
 class CompletedOrderAdmin(ModelAdmin):
     list_display = ["user", "order", "completed_on"]
-    search_fields = ["user", "order", "completed_on"]
+    search_fields = ["user__username","created_by__username", "order", "completed_on"]
     list_filter = ["user", "order", "completed_on"]
 
 class ProjectAdmin(ModelAdmin):
     list_display = ["name", "category", "created_by"]
-    search_fields = ["name", "category", "created_by", "members"]
+    search_fields = ["name", "category__name", "created_by__username"]
     list_filter = ["name", "category", "created_by"]
 
 class BidAdmin(ModelAdmin):
-    list_display = ["budget", "description", "created_by"]
-    search_fields = ["budget", "description", "created_by"]
+    list_display = ["project","created_by", "budget"]
+    search_fields = ["budget", "description", "created_by__username", "project__name"]
     list_filter = ["budget", "description", "created_by"]
 
 class categoriesAdmin(ModelAdmin):
@@ -47,4 +47,3 @@ admin.site.register(Bid, BidAdmin)
 admin.site.register(categories, categoriesAdmin)
 admin.site.register(EmailSubscription, EmailSubscriptionAdmin)
 admin.site.register(EmailRequest, EmailRequestAdmin)
-
