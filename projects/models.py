@@ -25,7 +25,7 @@ class categories(models.Model):
 
 
 class Project(models.Model):
-    name = models.CharField(max_length=60, unique=True)
+    name = models.CharField(max_length=255, unique=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     budget = models.FloatField()
     description = models.TextField(null=True, blank=True)
