@@ -13,6 +13,7 @@ from django.utils.html import strip_tags
 from thinkgroupy import settings
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+import requests
 UserModel = get_user_model()
 
 
@@ -26,6 +27,7 @@ def account_activated(request):
 
 def account_activated_false(request):
     return render(request, 'accounts/account_activated_false.html')
+
 
 def signup(request):
     if request.user.is_authenticated:
@@ -41,6 +43,8 @@ def signup(request):
                 current_site = get_current_site(request)
                 mail_subject = 'Activate your account.'
                 to_email = form.cleaned_data.get('email')
+                post_data = {'fields[email]': to_email, 'fields[name]': request.POST.get('first_name'), 'fields[last_name]': request.POST.get('last_name'), 'ml-submit': '1', 'anticsrf': True}
+                requests.post('https://static.mailerlite.com/webforms/submit/k7y7q6', data=post_data)
                 html_content = render_to_string('accounts/activation_mail.html', {
                     'user': user,
                     'domain': current_site.domain,
@@ -48,7 +52,6 @@ def signup(request):
                     'token': default_token_generator.make_token(user),
                 })
                 text_content = strip_tags(html_content)
-        
                 email = EmailMultiAlternatives(mail_subject, text_content, settings.EMAIL_HOST_USER, [to_email])
                 email.attach_alternative(html_content, "text/html")
                 email.send()
@@ -60,7 +63,6 @@ def signup(request):
         else:
             form = SignUpForm()
             return render(request, 'accounts/signup.html', {'form': form})
-
 
 
 def activate(request, uidb64, token):
