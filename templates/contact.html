@@ -1,7 +1,3 @@
-{% extends "accounts/login_base.html" %}
-{% load static %}
-{% block head %}<title>Thinkgroupy | contact-us</title>{% endblock head %}
-
 {% block body_block %}
 <div class="container-contact" style="
     margin-top: 89px; background-image: url({% static 'pics/contact-us-bg.png' %}) !important;">
@@ -42,6 +38,7 @@
   <div class="textarea-contact-form">
     <textarea class="form-control" name="message" placeholder="Message" rows="6"></textarea>
     </div>
+    <div class="g-recaptcha" data-sitekey="{{RECAPTCHA_SITE_KEY}}"></div>
     <button type="submit" class="submit-btn btn btn-light pullright">SUBMIT</button>
 </form>
   </div>
@@ -61,4 +58,5 @@
   </div>
 </div>
 </div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 {% endblock %}
