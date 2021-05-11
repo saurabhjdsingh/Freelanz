@@ -172,8 +172,9 @@ LOGIN_REDIRECT_URL = 'dashboard:dashboard'
 LOGIN_URL = reverse_lazy('accounts:signin')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+username= config("EMAIL_USERNAME")
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.transmail.co.in'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
